@@ -1,68 +1,68 @@
 <body>
     <div class="testbox">
-      <form action="/">
+      <form #reportForm = "ngForm" (ngSubmit) = "onClickSubmit(reportForm.value)">
         <h1>Complaint Form</h1>
         <p>Please send us details about the incident you would like to report. Our Complaint Center will analyze your complaint and take the appropriate measures in order that the reported situation will not occur at any other time in the future.</p>
         <hr/>
         <div class="item">
           <p>Date of complaint</p>
-          <input type="date" name="name" required/>
+          <input type="date" name="dateOfComp" required ngModel>
           <i class="fas fa-calendar-alt"></i>
         </div>
         <div class="item">
           <p>Name</p>
-          <input type="text" name="name" placeholder="First" />
-          <input type="text" name="name" placeholder="Last" />
+          <input type="text" name="fName" placeholder="First" ngModel>
+          <input type="text" name="lName" placeholder="Last" ngModel>
         </div>
         <div class="item">
           <p>Email</p>
-          <input type="text" name="name"/>
+          <input type="text" name="email" ngModel>
         </div>
         <div class="item address">
           <p>Store Address</p>
           <div class="street">
-            <input class="street-item" type="text" name="name" placeholder="Street address" />
-            <input  class="street-item" type="text" name="name" placeholder="Street addres line 2" />
-            <input type="text" name="name" placeholder="City" />
-            <input type="text" name="name" placeholder="Region" />
-            <input type="text" name="name" placeholder="Postal / zip code" />
-            <select>
+            <input class="street-item" type="text" name="sAddress" placeholder="Street address" ngModel>
+            <input  class="street-item" type="text" name="sAddress2" placeholder="Street addres line 2" ngModel>
+            <input type="text" name="city" placeholder="City" ngModel>
+            <input type="text" name="region" placeholder="Region" ngModel>
+            <input type="text" name="pCode" placeholder="Postal / zip code" ngModel>
+            <select name="sLocation" ngModel>
               <option value="">Store location</option>
-              <option value="1">CBD store</option>
-              <option value="2">Parramatta</option>
-              <option value="3">Chatswood</option>
-              <option value="4">Mascot</option>
-              <option value="5">Rose bay</option>
+              <option value="CBD Store">CBD store</option>
+              <option value="Parramatta">Parramatta</option>
+              <option value="Chatswood">Chatswood</option>
+              <option value="Mascot">Mascot</option>
+              <option value="Rose Bay">Rose bay</option>
             </select>
           </div>
         </div>
         <div class="item">
           <p>Date of the reported incident</p>
-          <input type="date" name="name" required/>
+          <input type="date" name="date" required ngModel>
           <i class="fas fa-calendar-alt"></i>
         </div>
         <div class="item location">
           <p>Incident location</p>
-          <input type="text" name="name"/>
+          <input type="incLocation" name="name" ngModel>
         </div>
         <div class="item complaint-details">
           <p>Complaint details</p>
           <div class="complaint-details-item">
-            <textarea rows="5"></textarea>
+            <textarea name="compDetails" rows="5" ngModel></textarea>
           </div>
         </div>
         <div class="item desired-outcome">
           <p>Desired outcome</p>
           <div class="desired-outcome-item">
-            <textarea rows="5"></textarea>
+            <textarea name="desiredOutcome" rows="5" ngModel></textarea>
             <small>By signing you declare that all information you have entered is truthful and accurate.</small>
           </div>
         </div>
         <h4>Your signature</h4>
-        <textarea rows="5"></textarea>
+        <textarea name="signature" rows="5" ngModel></textarea>
         <small>By signing you declare that all information you have entered is truthful and accurate.</small>
         <div class="btn-block">
-          <button type="submit" href="/">Send</button>
+          <button type="submit">Send</button>
         </div>
       </form>
     </div>

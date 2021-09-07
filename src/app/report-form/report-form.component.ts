@@ -12,4 +12,8 @@ export class ReportFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClickSubmit(data) {
+    
+ }
+
 }
