@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+Author: Briana Margetts 
+Student number: 140574003
+-->
+<html>
+    <head>
+        <title>Export Incidents</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!--</script><script  src="./script.js"></script>-->
+    </head>
+    <body ng-app="exportCSV">
+	<div ng-controller="csvController">
+
+        <table id="incidentTable" class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Date of incident</th>
+                    <th>Incident location</th>
+                    <th>Complaint details</th>
+                    <th>Desired outcome</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>31/08/21</td>
+                    <td>123 happy st, Sydney 2000</td>
+                    <td>Pothole in the middle of road</td>
+                    <td>Please fix asap!</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>01/09/21</td>
+                    <td>34 friend rd, Sydney 2000</td>
+                    <td>Broken drain cover</td>
+                    <td>Please fix asap!</td>
+                </tr>
+        </table>
+        <button export-to-csv>Export CSV</button>
+    </body>
+
+</html>
