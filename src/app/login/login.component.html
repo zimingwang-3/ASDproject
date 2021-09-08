@@ -11,28 +11,29 @@ Student number: 13564810
 		<!--</script><script  src="./script.js"></script>-->
     </head>
     <body>
+
         <h1>Enter Login Details</h1>
-        <form action="login.html" method="post">
-            <div class="username">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+
+        <form>
+            <div class="container">
+              <label for="uname"><b>Username</b></label>
+              <input type="text" placeholder="Enter Username" name="uname" required>
+          
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" required>
+                  
+              <button type="submit">Login</button>
+
+              <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+              </label>
             </div>
-            <div class="password">
-                <label for="pword"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="pword" required>
+          
+            <div class="container" style="background-color:#f1f1f1">
+              <button type="button" class="cancelbtn">Cancel</button>
+              <span class="psw">Forgot <a href="#">password?</a></span>
             </div>
-            <div class="fgtpword">
-                <span class="psw"><a href="#">Forgot password?</a></span>
-            </div>
-            <div class="rmbrme">
-                <label>
-                    <input type="checkbox" name="remember"> Remember me
-                </label>
-            </div>
-            <div class="buttons">
-                <button type="button" class="cancelbtn">Cancel</button>
-                <button type="submit">Login</button>
-            </div>
-        </form>
+          </form>
+
     </body>
 </html>
