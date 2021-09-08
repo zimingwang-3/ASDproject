@@ -21,6 +21,3 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
-- script: |
-    node server.js
-  displayName: 'run server'
