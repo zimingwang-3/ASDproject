@@ -5,9 +5,9 @@ import { LoginComponent } from './login/login.component';
 import {ReportFormComponent} from './report-form/report-form.component';
 
 const routes: Routes = [
-  { path: 'app-export-csv', component: ExportCsvComponent},
-  { path: 'app-login', component: LoginComponent},
-  { path: 'app-report-form', component: ReportFormComponent}
+  { path: 'csv', component: ExportCsvComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'form', component: ReportFormComponent}
 
 ];
 
