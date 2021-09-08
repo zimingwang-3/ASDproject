@@ -5,11 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReportFormComponent } from './report-form/report-form.component';
 import { FormsModule } from '@angular/forms';
+import { ExportCsvComponent } from './export-csv/export-csv.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReportFormComponent
+    ReportFormComponent,
+    ExportCsvComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
