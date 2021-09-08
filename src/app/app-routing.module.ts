@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: 'csv', component: ExportCsvComponent},
   { path: 'login', component: LoginComponent},
   { path: 'form', component: ReportFormComponent}
-
 ];
 
 @NgModule({
