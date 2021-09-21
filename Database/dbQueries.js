@@ -13,7 +13,22 @@ async function getAllUsers() {
     return usersList;
     
 }
+async function addUser(newUser) {
+    let client = getMongoClient();
+    await connect(client);
+
+    const user = await client.db("ASDdata").collection("Users").insertOne(newUser);
+    console.log("new user added: ", user);
+}
+
+async function findUser(user){
+    let client = getMongoClient();
+    await connect(client);
+
+    const fetchedUser = await client.db("ASDdata").collection("Users").findOne(user);
+    return fetchedUser;
+}
 
 module.exports = {
-    getAllUsers: getAllUsers,
+    getAllUsers: getAllUsers, addUser, findUser
 };

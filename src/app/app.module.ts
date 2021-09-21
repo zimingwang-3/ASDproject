@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ExportCsvComponent } from './export-csv/export-csv.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     ReportFormComponent,
     ExportCsvComponent,
     LoginComponent,
-    NavigationComponent
+    NavigationComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
