@@ -7,7 +7,7 @@ html, body {
     outline: none;
     font-family: Roboto, Arial, sans-serif;
     font-size: 14px;
-    color: #666;
+    color: rgb(34, 34, 34);
     line-height: 22px;
     }
     h1 {
@@ -66,7 +66,7 @@ html, body {
     .item i, input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     font-size: 20px;
-    color: #a9a9a9;
+    color: #0e0e0e;
     }
     .item i {
     left: 94%;
