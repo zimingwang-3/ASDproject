@@ -22,11 +22,10 @@ app.get('/', async (req, res) => {
 
 });
 
-app.post('/api/submitComplaint/', async (req, res) => {
-
+app.post('/api/submitComplaint', async (req, res) => {
+  db.reportIncident(req.body);
   console.log(req.body);
-  res.end();
-
+  res.send({status: "incident reported"});
 });
 
 app.post('/login', async (req,res) => {

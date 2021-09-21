@@ -19,7 +19,7 @@ export class ReportFormComponent implements OnInit {
   }
 
   async submitComplaint(data): Promise<void> {
-    await fetch(this.URL + '/api/submitComplaint/', {
+    await fetch(this.URL + '/api/submitComplaint', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
