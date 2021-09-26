@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const db = require('./Database/dbQueries');
+const { nextTick } = require('process');
 
 const frontEndURL = 'http://localhost';
 const frontEndHostPort = '4200';
@@ -28,6 +29,11 @@ app.post('/api/submitComplaint', async (req, res) => {
   res.send({status: "incident reported"});
 });
 
+app.post('/fetchComplaints',verify, async (req, res) => {
+  complaints = await db.userIncidents({userId: req.body.user._id});
+  res.send(complaints);
+});
+
 app.post('/login', async (req,res) => {
   console.log(req.body);
   //data validation
@@ -46,22 +52,16 @@ app.post('/login', async (req,res) => {
     const password = await bcrypt.compare(req.body.password, await user.password)
     if(!password) return res.send({status: "access denied (incorrect password)"});
 
-    //create access and refresh token. 
+    //create access token
     const accessToken = jwt.sign(
       { _id: user._id }, 
       process.env.ACCESS_SECRET, 
-      { expiresIn: '1m' });
-
-    const refreshToken = jwt.sign(
-      {_id: user._id}, 
-      process.env.REFRESH_SECRET, 
-      { expiresIn: '1h' });
+      { expiresIn: '3h' });
 
     //send a welcome back with token id
     res.send({
       status: "Welcome back, " + user.email,
-      AT: accessToken,
-      RT: refreshToken
+      AT: accessToken
     })
   }
 
@@ -85,6 +85,44 @@ app.post('/register', async (req,res) => {
   db.addUser(req.body);
   res.send(`added user: ${req.body}`);
 })
+
+function verify(req,res,next) {
+  console.log("verify function: ",req.body)
+  const token = req.body.token;
+  if(!token) return res.send('Access Denied no access token: '+ token);
+  try {
+      const user = jwt.verify(token, process.env.ACCESS_SECRET);
+      req.body.user = user;
+      next();
+  } catch (error) {
+    console.log(error);
+      res.send("access token invalid");
+  }
+}
+
+app.post('/verify', async (req,res) => {
+  const token = req.body.token;
+
+  if(!token){ 
+    return res.send(
+    {
+      description: 'Access Denied no access token: '+ token,
+      verification: false
+    });
+  }
+
+  try {
+    jwt.verify(token, process.env.ACCESS_SECRET);
+    res.send({verification: true});
+  } catch (error) {
+    console.log(error);
+    res.send({
+      description: "access token invalid",
+      verification: false
+    });
+  }
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

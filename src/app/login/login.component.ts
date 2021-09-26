@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-
+import { CookieService } from 'ngx-cookie-service'
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +11,7 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
   URL = 'http://localhost:3500';
   user: any;
-  constructor(private loginService: LoginService) { }
+  constructor(private authService: AuthService, private loginService: LoginService, private cookieService: CookieService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,7 +20,15 @@ export class LoginComponent implements OnInit {
     console.log(data);
 
     //call login service with user data
-    this.loginService.login(data).subscribe(data => this.user = data);
+    this.loginService.login(data).subscribe(data => {
+      this.user = data;
+      this.cookieService.set('access-token', this.user.AT);
+      if(this.user.AT){
+        this.router.navigate(['csv']);
+        //update user login status
+        this.authService.verifyUser();
+      } 
+    });
   }
 
 }

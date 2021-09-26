@@ -46,6 +46,17 @@ async function reportIncident(incident){
     console.log("new report added: ", report);
 }
 
+async function userIncidents(account){
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+    console.log("ACCOUNT NUMBER: ", account)
+    //query DB. add incident report
+    const fetchedIncidents = await client.db("ASDdata").collection("Complaints").find(account).toArray();
+    return fetchedIncidents;
+}
+
+
 module.exports = {
-    getAllUsers: getAllUsers, addUser, findUser, reportIncident
+    getAllUsers: getAllUsers, addUser, findUser, reportIncident, userIncidents
 };

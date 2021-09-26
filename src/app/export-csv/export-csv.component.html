@@ -17,23 +17,28 @@ Student number: 140574003
                 <tr>
                     <th>ID</th>
                     <th>Date of incident</th>
-                    <th>Incident location</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Store city</th>
+                    <th>Store region</th>
+                    <th>Store location</th>
+                    <th>Store name</th>
+                    <th>Date of incident</th>
                     <th>Complaint details</th>
                     <th>Desired outcome</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>31/08/21</td>
-                    <td>123 happy st, Sydney 2000</td>
-                    <td>Pothole in the middle of road</td>
-                    <td>Please fix asap!</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>01/09/21</td>
-                    <td>34 friend rd, Sydney 2000</td>
-                    <td>Broken drain cover</td>
-                    <td>Please fix asap!</td>
+                <tr *ngFor="let complaint of complaints">
+                    <td>{{complaint._id}}</td>
+                    <td>{{complaint.dateOfComp}}</td>
+                    <td>{{complaint.fName}} {{complaint.lName}}</td>
+                    <td>{{complaint.email}}</td>
+                    <td>{{complaint.city}}</td>
+                    <td>{{complaint.region}}</td>
+                    <td>{{complaint.sAddress}}</td>
+                    <td>{{complaint.name}}</td>
+                    <td>{{complaint.date}}</td>
+                    <td>{{complaint.compDetails}}</td>
+                    <td>{{complaint.desiredOutcome}}</td>
                 </tr>
         </table>
         <button class="exportBtn" export-to-csv>Export CSV</button>
