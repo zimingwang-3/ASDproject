@@ -12,15 +12,15 @@ Student number: 13564810
     </head>
     <body>
 
-        <h1>Enter Login Details</h1>
+        <h1>Login</h1>
 
-        <form>
+        <form #loginForm = "ngForm" (ngSubmit) = "login(loginForm.value)">
             <div class="container">
-              <label for="uname"><b>Username</b></label>
-              <input type="text" placeholder="Enter Username" name="uname" required>
+              <label for="email"><b>email</b></label>
+              <input type="text" placeholder="Enter Username" name="email" required  ngModel>
           
               <label for="psw"><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" name="psw" required>
+              <input type="password" placeholder="Enter Password" name="password" required  ngModel>
                   
               <button type="submit">Login</button>
 
@@ -34,5 +34,6 @@ Student number: 13564810
             </div>
           </form>
 
+          <p *ngIf="user" style="color: red; text-align: center;">{{user.status}}</p>
     </body>
 </html>

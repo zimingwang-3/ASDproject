@@ -29,35 +29,42 @@ app.post('/api/submitComplaint', async (req, res) => {
 });
 
 app.post('/login', async (req,res) => {
+  console.log(req.body);
   //data validation
   if(!req.body.email) return res.send({status: "email field empty"});
   if(!req.body.password) return res.send({status: "password field empty"});
 
-  console.log(req.body);
   //fetch user
   const user = await db.findUser({"email": req.body.email});
-  console.log(await user);
-  //check if password is valid
-  const password = await bcrypt.compare(req.body.password, await user.password)
-  if(!password) return res.send({status: "access denied (incorrect password)"});
 
-  //create access and refresh token. 
-  const accessToken = jwt.sign(
-    { _id: user._id }, 
-    process.env.ACCESS_SECRET, 
-    { expiresIn: '1m' });
+  //check if user is found
+  if(user == null){
+    res.send({status: "Incorrect credentials"});
 
-  const refreshToken = jwt.sign(
-    {_id: user._id}, 
-    process.env.REFRESH_SECRET, 
-    { expiresIn: '1h' });
+  }else{
+    //check if password is valid
+    const password = await bcrypt.compare(req.body.password, await user.password)
+    if(!password) return res.send({status: "access denied (incorrect password)"});
 
-  //send a welcome back with token id
-  res.send({
-    status: "Welcome back, " + user.email,
-    AT: accessToken,
-    RT: refreshToken
-  })
+    //create access and refresh token. 
+    const accessToken = jwt.sign(
+      { _id: user._id }, 
+      process.env.ACCESS_SECRET, 
+      { expiresIn: '1m' });
+
+    const refreshToken = jwt.sign(
+      {_id: user._id}, 
+      process.env.REFRESH_SECRET, 
+      { expiresIn: '1h' });
+
+    //send a welcome back with token id
+    res.send({
+      status: "Welcome back, " + user.email,
+      AT: accessToken,
+      RT: refreshToken
+    })
+  }
+
 })
 
 app.post('/register', async (req,res) => {
