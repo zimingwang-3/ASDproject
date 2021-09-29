@@ -24,9 +24,7 @@ export class LoginComponent implements OnInit {
       this.user = data;
       this.cookieService.set('access-token', this.user.AT);
 
-      console.log(this.user.AT)
       if(this.user.AT){
-        console.log(this.user.AT)
         this.authService.verifyUser();
         this.router.navigate(['csv']);
         //update user login status

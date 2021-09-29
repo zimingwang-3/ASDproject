@@ -3,15 +3,6 @@
 Author: Luke Galic
 Student number: 13564810
 -->
-<html>
-    <head>
-        <title>Login!</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!--</script><script  src="./script.js"></script>-->
-    </head>
-    <body>
-
         <h1>Login</h1>
 
         <form #loginForm = "ngForm" (ngSubmit) = "login(loginForm.value)">
@@ -35,5 +26,4 @@ Student number: 13564810
           </form>
 
           <p *ngIf="user" style="color: red; text-align: center;">{{user.status}}</p>
-    </body>
-</html>
+
