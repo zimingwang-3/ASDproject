@@ -10,7 +10,6 @@ function getMongoClient() {
 
 async function connect(client) {
     try {
-        
         await client.connect();
     }
     catch (e) {

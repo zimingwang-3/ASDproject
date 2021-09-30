@@ -1,0 +1,29 @@
+#incidentTable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 75%;
+    margin-top: 100px;
+    margin: auto;
+  }
+  
+  #incidentTable td, #incidentTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  .exportBtn{
+    margin: auto;
+    display: block;
+    margin-top: 15px;
+  }
+  
+  #incidentTable tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #incidentTable tr:hover {background-color: #ddd;}
+  
+  #incidentTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #000000;
+    color: white;
+  }
