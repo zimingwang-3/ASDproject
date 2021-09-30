@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
         this.authService.verifyUser();
         this.router.navigate(['csv']);
         //update user login status
-        this.authService.verifyUser();
       } 
     });
   }

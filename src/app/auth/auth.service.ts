@@ -25,12 +25,12 @@ export class AuthService {
   }
 
   async verifyUser(){
-    const AT = this.cookieService.get("access-token");
 
+    this.AT = this.cookieService.get("access-token");
+    
     try {
       //subscribe to auth service to verify token
       this.auth = await this.verifyToken(this.AT);
-      console.log(await this.auth);
     } catch (error) {
       console.log("Something went wrong with token verification: " ,error)
     }
