@@ -22,4 +22,9 @@ export class AuthGuard implements CanActivate {
     }
   }
 
+  async canActivateAdmin() {
+    this.isUser = await this.authService.verifyAdmin();
+  }
+
 }
+
