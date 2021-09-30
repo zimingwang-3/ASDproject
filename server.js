@@ -23,17 +23,26 @@ app.get('/', async (req, res) => {
 
 });
 
-//report form end-points
-app.post('/api/submitComplaint',verify, async (req, res) => {
-  console.log(req.body.user._id)
-  const userId = req.body.user._id;
-  delete req.body.user;
-  delete req.body.token;
 
-  req.body.userId = userId;
-  db.reportIncident(req.body);
-  console.log(req.body);
-  res.send({status: "incident reported"});
+app.post('/api/submitComplaint', async (req, res) => {
+  if(!req.body.token) {
+    res.send({status: "user not logged in"});
+  }
+  try {
+    const userID = jwt.verify(req.body.token, process.env.ACCESS_SECRET);
+    complaint = req.body;
+    complaint.userId = userID._id;
+    delete complaint.token;
+    db.reportIncident(complaint);
+    console.log(complaint);
+    res.send({status: "incident reported"});
+  } catch (error) {
+    console.log(error);
+    res.send({
+      description: "access token invalid",
+      verification: false
+    });
+  }
 });
 
 app.post('/fetchComplaints',verify, async (req, res) => {
@@ -83,6 +92,7 @@ app.post('/login', async (req,res) => {
     //send a welcome back with token id
     res.send({
       status: "Welcome back, " + user.email,
+      isAdmin: user.admin,
       AT: accessToken
     })
   }
