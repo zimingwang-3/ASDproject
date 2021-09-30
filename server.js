@@ -23,6 +23,7 @@ app.get('/', async (req, res) => {
 
 });
 
+
 app.post('/api/submitComplaint', async (req, res) => {
   if(!req.body.token) {
     res.send({status: "user not logged in"});
@@ -42,14 +43,28 @@ app.post('/api/submitComplaint', async (req, res) => {
       verification: false
     });
   }
-  
 });
 
 app.post('/fetchComplaints',verify, async (req, res) => {
   complaints = await db.userIncidents({userId: req.body.user._id});
   res.send(complaints);
 });
+app.post('/deleteComplaints',verify, async (req, res) => {
+  complaints = await db.userIncidents({userId: req.body.user._id});
+  res.send(complaints);
+});
+app.post('/updateComplaints',verify, async (req, res) => {
+  try {
+    update = await db.userIncidents({userId: req.body.user._id, _id: req.body._id}, req.body.update);
+    res.send({status: true});
+  } catch (error) {
+    console.log(error);
+    res.send({status: false})
+  }
+});
 
+
+//user end-points
 app.post('/login', async (req,res) => {
   console.log(req.body);
   //data validation
