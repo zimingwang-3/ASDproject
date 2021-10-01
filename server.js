@@ -84,6 +84,10 @@ app.post('/login', async (req,res) => {
     //create access token
     const accessToken = jwt.sign(
       { _id: user._id }, 
+      { 
+        _id: user._id,
+        admin: user.admin
+      }, 
       process.env.ACCESS_SECRET, 
       { expiresIn: '3h' });
 
@@ -144,11 +148,15 @@ app.post('/verify', async (req,res) => {
   try {
     jwt.verify(token, process.env.ACCESS_SECRET);
     res.send({verification: true});
+    const user = jwt.verify(token, process.env.ACCESS_SECRET);
+    res.send({verification: true, admin: user.admin});
   } catch (error) {
     console.log(error);
     res.send({
       description: "access token invalid",
       verification: false
+      verification: false,
+      admin: false
     });
   }
 })

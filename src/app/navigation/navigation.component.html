@@ -2,6 +2,7 @@
     <li *ngIf="user == true"><a routerLink='/csv'>Account</a></li>
     <li *ngIf="user == false"><a routerLink='/login'>Login</a></li>
     <li *ngIf="loggedInAdmin == true"><a routerLink='/register'>Add user</a></li>
+    <li *ngIf="admin == true"><a routerLink='/register'>Add user</a></li>
     <li *ngIf="user == true"><a routerLink='/form'>Report Incident</a></li>
     <li *ngIf="user == true" style="background-color: red; float: right;"><a (click)="logout()">logout</a></li>
 </ul>

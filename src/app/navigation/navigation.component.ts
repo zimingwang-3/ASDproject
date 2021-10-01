@@ -12,15 +12,25 @@ export class NavigationComponent implements OnInit {
   loggedInAdmin: any;
   user: any;
 
+  admin: any;
   constructor(private cookieService: CookieService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.isUser();
+    this.isAdmin();
+    
 
     this.authService.isUser$.subscribe(u => {
       if(u == true && this.user == false){
         this.isUser(); 
         this.user = true;
+      }
+    })
+
+    this.authService.isAdmin$.subscribe(u => {
+      if(u == true && this.admin == false){
+        this.isAdmin(); 
+        this.admin = true;
       }
     })
   }
@@ -33,6 +43,17 @@ export class NavigationComponent implements OnInit {
       }else{ 
         this.user = false; 
         console.log("user AT is not valid. User logged off.")
+      }
+    }
+  
+    async isAdmin(){
+      this.admin = await this.authService.verifyAdmin();
+      console.log(await this.admin);
+      if(this.admin == true){
+        this.admin = true; 
+      }else{ 
+        this.admin = false; 
+        console.log("admin AT is not valid. User logged off.")
       }
     }
     
