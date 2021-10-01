@@ -15,6 +15,8 @@ export class AuthService {
   auth: any;
   user = new Subject<Boolean>();
   isUser$ = this.user.asObservable();
+  admin = new Subject<Boolean>();
+  isAdmin$ = this.admin.asObservable();
   
   async verifyToken(AT) {
     //if access token is missing return false
@@ -31,6 +33,7 @@ export class AuthService {
     try {
       //subscribe to auth service to verify token
       this.auth = await this.verifyToken(this.AT);
+      this.verifyAdmin();
     } catch (error) {
       console.log("Something went wrong with token verification: " ,error)
     }
@@ -55,11 +58,15 @@ export class AuthService {
       console.log("Something went wrong with token verification: " ,error)
     }
 
+    console.log(this.auth.admin);
+
     if(this.auth.admin){ 
-      this.user.next(true); 
+      this.user.next(false); 
+      this.admin.next(true); 
+      
       return true;
     }else{
-      this.user.next(false); 
+      this.admin.next(false); 
       return false; 
     }
   }
