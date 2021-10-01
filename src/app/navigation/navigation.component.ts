@@ -11,7 +11,6 @@ import { AuthService } from '../auth/auth.service';
 export class NavigationComponent implements OnInit {
   loggedInAdmin: any;
   user: any;
-
   admin: any;
   constructor(private cookieService: CookieService, private router: Router, private authService: AuthService) { }
 

@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: 'csv', component: ExportCsvComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent, },
   { path: 'form', component: ReportFormComponent, canActivate: [AuthGuard]},
-  { path: 'register', component: CreateUserComponent, canActivate: [AuthGuard]}
   { path: 'register', component: CreateUserComponent, canActivate: [RoleService]}
 ];
 

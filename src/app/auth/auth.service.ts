@@ -33,7 +33,6 @@ export class AuthService {
     try {
       //subscribe to auth service to verify token
       this.auth = await this.verifyToken(this.AT);
-      console.log(this.auth);
       this.verifyAdmin();
     } catch (error) {
       console.log("Something went wrong with token verification: " ,error)
