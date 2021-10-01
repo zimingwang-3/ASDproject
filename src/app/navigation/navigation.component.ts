@@ -59,6 +59,7 @@ export class NavigationComponent implements OnInit {
   logout(){
     this.cookieService.delete('access-token');
     this.user = false;
+    this.admin = false;
     this.router.navigate(['/', 'login']);
   }
 }
