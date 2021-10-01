@@ -26,6 +26,8 @@ Student number: 140574003
                     <th>Date of incident</th>
                     <th>Complaint details</th>
                     <th>Desired outcome</th>
+                    <th>edit</th>
+                    <th>delete</th>
                 </tr>
                 <tr *ngFor="let complaint of complaints">
                     <td>{{complaint._id}}</td>
@@ -39,6 +41,8 @@ Student number: 140574003
                     <td>{{complaint.date}}</td>
                     <td>{{complaint.compDetails}}</td>
                     <td>{{complaint.desiredOutcome}}</td>
+                    <td><img width="25px" height="25px" src="assets/images/edit.png" alt="delete"></td>
+                    <td><img width="25px" height="25px" src="assets/images/bin.png" alt="delete"></td>
                 </tr>
         </table>
         <button class="exportBtn" export-to-csv>Export CSV</button>
