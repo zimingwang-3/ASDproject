@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router){}
   isUser: any;
+  isAdmin: any;
 
   async canActivate() {
     this.isUser = await this.authService.verifyUser();
@@ -21,10 +22,22 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
-
-  async canActivateAdmin() {
-    this.isUser = await this.authService.verifyAdmin();
-  }
-
 }
+
+export class RoleGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router){}
+  isAdmin: any;
+  async canActivate() {
+    this.isAdmin = await this.authService.verifyAdmin();
+    if(this.isAdmin) {
+      console.log("User is Admin");
+      return true;
+    } else {
+      console.log("User is not Admin");
+      return false;
+    }
+  }
+}
+
+
 
