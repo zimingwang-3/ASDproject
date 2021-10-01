@@ -11,6 +11,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthGuard } from './auth/auth.guard';
+import { RoleGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
