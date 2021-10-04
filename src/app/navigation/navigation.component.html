@@ -1,8 +1,9 @@
 <ul>
-    <li *ngIf="user == true"><a routerLink='/csv'>Account</a></li>
+    <li *ngIf="user == true"><a routerLink='/csv'>Incident Report List</a></li>
     <li *ngIf="user == false"><a routerLink='/login'>Login</a></li>
     <li *ngIf="admin == true"><a routerLink='/add-employee'>Add user</a></li>
     <li *ngIf="user == false"><a routerLink='/register'>Register</a></li>
     <li *ngIf="user == true"><a routerLink='/form'>Report Incident</a></li>
+    <li *ngIf="admin == true"><a routerLink='/store'>Store Management</a></li>
     <li *ngIf="user == true" style="background-color: red; float: right;"><a (click)="logout()">logout</a></li>
 </ul>

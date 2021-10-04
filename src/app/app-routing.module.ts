@@ -8,13 +8,15 @@ import { ExportCsvComponent } from './export-csv/export-csv.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {ReportFormComponent} from './report-form/report-form.component';
+import { StoreManageComponent } from './store-manage/store-manage.component';
 
 const routes: Routes = [
   { path: 'csv', component: ExportCsvComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent, },
   { path: 'form', component: ReportFormComponent, canActivate: [AuthGuard]},
   { path: 'add-employee', component: CreateUserComponent, canActivate: [RoleService]},
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'store', component: StoreManageComponent, canActivate: [RoleService]}
 ];
 
 @NgModule({

@@ -118,6 +118,42 @@ async function deleteIncident(incidentID, userID) {
     const fetchedIncidents = await client.db("ASDdata").collection("Complaints").deleteOne({_id: ObjectId(incidentID), userId: userID});
     return fetchedIncidents;
 }
+async function AdminDeleteIncident(incidentID) {
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //query DB. add incident report
+    const fetchedIncidents = await client.db("ASDdata").collection("Complaints").deleteOne({_id: ObjectId(incidentID)});
+    return fetchedIncidents;
+}
+async function allIndcidents() {
+    let client = getMongoClient();
+    await connect(client);
+
+    const fetchedIncidents = await client.db("ASDdata").collection("Complaints").find().toArray();
+    return fetchedIncidents;
+}
+
+
+async function getAllStores() {
+    let client = getMongoClient();
+    await connect(client);
+
+    const fetchedStores = await client.db("ASDdata").collection("SCentres").find().toArray();
+    return fetchedStores;
+}
+async function addStore(store, centre) {
+    let client = getMongoClient();
+    await connect(client);
+
+    const addedStore = await client.db("ASDdata").collection("SCentres").updateOne(
+        { Name: centre }, 
+        { $push: { Stores: store } });
+
+    return addedStore;
+
+}
 
 
 async function addID(newUser) {
@@ -181,6 +217,7 @@ async function updateID(eid, update){
 
     return updateEmployee;
 }
+
 module.exports = {
-    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser
+    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIndcidents, getAllStores, addStore
 };

@@ -15,6 +15,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/auth.guard';
 import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
+import { StoreManageComponent } from './store-manage/store-manage.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RegisterComponent } from './register/register.component';
     NavigationComponent,
     CreateUserComponent,
     AccountComponent,
-    RegisterComponent
+    RegisterComponent,
+    StoreManageComponent
   ],
   imports: [
     BrowserModule,
