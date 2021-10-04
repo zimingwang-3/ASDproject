@@ -6,6 +6,7 @@ const getMongoClient = connection.getMongoClient;
 var ObjectId = require('mongodb').ObjectId; 
 
 
+//user queries
 async function getAllUsers() {
     //connect to db
     let client = getMongoClient();
@@ -69,7 +70,7 @@ async function deleteUser(user) {
     return fetchedIncidents;
 }
 
-
+//incident queries
 async function reportIncident(incident){
     //connect to db
     let client = getMongoClient();
@@ -135,7 +136,7 @@ async function allIndcidents() {
     return fetchedIncidents;
 }
 
-
+//store queries
 async function getAllStores() {
     let client = getMongoClient();
     await connect(client);
@@ -155,7 +156,7 @@ async function addStore(store, centre) {
 
 }
 
-
+//centre employee queries (admin queries)
 async function addID(newUser) {
     //connect to db
     let client = getMongoClient();
