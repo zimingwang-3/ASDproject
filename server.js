@@ -276,6 +276,7 @@ app.post('/addStore',verifyAdmin, async (req,res) => {
   }
 })
 
+
 //verify end-points
 function verify(req,res,next) {
   console.log("verify function: ",req.body)
