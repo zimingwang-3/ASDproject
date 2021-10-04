@@ -6,6 +6,7 @@ const getMongoClient = connection.getMongoClient;
 var ObjectId = require('mongodb').ObjectId; 
 
 
+//user queries
 async function getAllUsers() {
     //connect to db
     let client = getMongoClient();
@@ -19,6 +20,15 @@ async function getAllUsers() {
     return usersList;
     
 }
+async function findUser(user){
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //query DB. Fetch users
+    const fetchedUser = await client.db("ASDdata").collection("Users").findOne({_id: ObjectId(user)});
+    return fetchedUser;
+}
 async function addUser(newUser) {
     //connect to db
     let client = getMongoClient();
@@ -28,17 +38,39 @@ async function addUser(newUser) {
     const user = await client.db("ASDdata").collection("Users").insertOne(newUser);
     console.log("new user added: ", user);
 }
+async function addUserAdmin(newUser) {
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+    newUser.admin = true;
 
-async function findUser(user){
+    //query DB. add user
+    const user = await client.db("ASDdata").collection("Users").insertOne(newUser);
+    console.log("new user added: ", user);
+}
+async function updateUser(user, update){
     //connect to db
     let client = getMongoClient();
     await connect(client);
 
-    //query DB. Fetch users
-    const fetchedUser = await client.db("ASDdata").collection("Users").findOne(user);
-    return fetchedUser;
+    //query DB. update
+    const updateUser = await client.db("ASDdata").collection("Users").updateOne(
+        { _id: ObjectId(user) }, 
+        { $set: update });
+
+    return updateUser;
+}
+async function deleteUser(user) {
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //query DB. delete
+    const fetchedIncidents = await client.db("ASDdata").collection("Users").deleteOne({_id: ObjectId(user)});
+    return fetchedIncidents;
 }
 
+//incident queries
 async function reportIncident(incident){
     //connect to db
     let client = getMongoClient();
@@ -48,7 +80,6 @@ async function reportIncident(incident){
     const report = await client.db("ASDdata").collection("Complaints").insertOne(incident);
     console.log("new report added: ", report);
 }
-
 async function userIncidents(account){
     //connect to db
     let client = getMongoClient();
@@ -67,7 +98,6 @@ async function userIncident(account,CID){
     const fetchedIncident = await client.db("ASDdata").collection("Complaints").findOne({_id: ObjectId(CID)});
     return fetchedIncident;
 }
-
 async function updateIncident(incident, update){
     //connect to db
     let client = getMongoClient();
@@ -89,7 +119,6 @@ async function deleteIncident(incidentID, userID) {
     const fetchedIncidents = await client.db("ASDdata").collection("Complaints").deleteOne({_id: ObjectId(incidentID), userId: userID});
     return fetchedIncidents;
 }
-
 async function AdminDeleteIncident(incidentID) {
     //connect to db
     let client = getMongoClient();
@@ -99,7 +128,6 @@ async function AdminDeleteIncident(incidentID) {
     const fetchedIncidents = await client.db("ASDdata").collection("Complaints").deleteOne({_id: ObjectId(incidentID)});
     return fetchedIncidents;
 }
-
 async function allIndcidents() {
     let client = getMongoClient();
     await connect(client);
@@ -108,6 +136,7 @@ async function allIndcidents() {
     return fetchedIncidents;
 }
 
+//store queries
 async function getAllStores() {
     let client = getMongoClient();
     await connect(client);
@@ -115,7 +144,6 @@ async function getAllStores() {
     const fetchedStores = await client.db("ASDdata").collection("SCentres").find().toArray();
     return fetchedStores;
 }
-
 async function addStore(store, centre) {
     let client = getMongoClient();
     await connect(client);
@@ -128,6 +156,69 @@ async function addStore(store, centre) {
 
 }
 
+//centre employee queries (admin queries)
+async function addID(newUser) {
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    try {
+        //query DB. add user
+        const user = await client.db("ASDdata").collection("StaffID").insertOne(
+            {
+                eid: newUser.eid,
+                storeId: newUser.storeId,
+                centreId: newUser.centreId, 
+                fName: newUser.fName,
+                lName: newUser.lName
+            });
+        console.log("new employee id: ", newUser.eid);
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+async function findID(employeeId){
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //query DB. Fetch users
+    const fetchedUser = await client.db("ASDdata").collection("Users").findOne({eid: employeeId});
+    return fetchedUser;
+}
+async function findAllID(){
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //query DB. Fetch users
+    const fetchedUser = await client.db("ASDdata").collection("StaffID").find().toArray();
+    return fetchedUser;
+}
+async function deleteID(eid) {
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    console.log(eid);
+    //query DB. add incident report
+    const fetchedIncidents = await client.db("ASDdata").collection("StaffID").deleteOne({eid: eid});
+    return fetchedIncidents;
+}
+async function updateID(eid, update){
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //query DB. update employee
+    const updateEmployee = await client.db("ASDdata").collection("StaffID").updateOne(
+        { eid: eid }, 
+        { $set: update });
+
+    return updateEmployee;
+}
+
 module.exports = {
-    getAllUsers: getAllUsers, addUser, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, AdminDeleteIncident, allIndcidents, getAllStores, addStore
+    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIndcidents, getAllStores, addStore
 };

@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/auth.guard';
+import { AccountComponent } from './account/account.component';
+import { RegisterComponent } from './register/register.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
 
 @NgModule({
@@ -23,6 +25,8 @@ import { StoreManageComponent } from './store-manage/store-manage.component';
     LoginComponent,
     NavigationComponent,
     CreateUserComponent,
+    AccountComponent,
+    RegisterComponent,
     StoreManageComponent
   ],
   imports: [
