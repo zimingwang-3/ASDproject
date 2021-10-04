@@ -15,6 +15,5 @@ export class ReportFormService {
       id: id, 
       update: update
     })
-    
   }
 }

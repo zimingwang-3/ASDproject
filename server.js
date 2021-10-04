@@ -18,13 +18,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
-
     res.redirect(`${frontEndURL}:${frontEndHostPort}`);
-
 });
 
-
-app.post('/api/submitComplaint', async (req, res) => {
+app.post('/api/submitComplaint',verify, async (req, res) => {
   if(!req.body.token) {
     res.send({status: "user not logged in"});
   }
@@ -49,20 +46,39 @@ app.post('/fetchComplaints',verify, async (req, res) => {
   complaints = await db.userIncidents({userId: req.body.user._id});
   res.send(complaints);
 });
-app.post('/deleteComplaints',verify, async (req, res) => {
-  complaints = await db.userIncidents({userId: req.body.user._id});
-  res.send(complaints);
-});
-app.post('/updateComplaints',verify, async (req, res) => {
+app.post('/fetchComplaint',verify, async (req, res) => {
   try {
-    update = await db.userIncidents({userId: req.body.user._id, _id: req.body._id}, req.body.update);
-    res.send({status: true});
+    console.log(req.body);
+    complaint = await db.userIncident(req.body.user._id, req.body.complaintId);
+    console.log(complaint);
+    res.send(complaint);
   } catch (error) {
     console.log(error);
-    res.send({status: false})
+    res.send({status: error})
   }
 });
 
+app.post('/deleteComplaint',verify, async (req, res) => {
+
+  complaint = await db.deleteIncident(req.body.complaintId, req.body.user._id);
+  if(complaint.deletedCount == 1) res.send({status: "report deleted", return: complaint});
+  if(complaint.deletedCount != 1) res.send({status: "report not deleted. Please try again"})
+});
+
+app.post('/updateComplaint',verify, async (req, res) => {
+  try {
+    update = await db.updateIncident({
+      userId: req.body.user._id,
+      _id: req.body.id
+    }, req.body.update);
+
+    console.log(update);
+    res.send({status: "updated incident successfully"});
+  } catch (error) {
+    console.log(error);
+    res.send({status: "error updating incident"})
+  }
+});
 
 //user end-points
 app.post('/login', async (req,res) => {
@@ -121,7 +137,7 @@ app.post('/register', async (req,res) => {
 })
 
 function verify(req,res,next) {
-  console.log("verify function: ",req.body)
+  console.log("verify function t: ",req.body)
   const token = req.body.token;
   if(!token) return res.send('Access Denied no access token: '+ token);
   try {

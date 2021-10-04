@@ -7,8 +7,8 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./report-form.component.css']
 })
 export class ReportFormComponent implements OnInit {
-
   URL = 'http://localhost:3500'
+
 
   constructor(private cookieService: CookieService) { }
 
@@ -18,10 +18,6 @@ export class ReportFormComponent implements OnInit {
   onClickSubmit(data) {
     data.token = this.cookieService.get('access-token');
     this.submitComplaint(data);
-  }
-
-  updateIncident(incidentId, update) {
-    
   }
 
   async submitComplaint(data): Promise<void> {

@@ -1,23 +1,29 @@
 <body>
     <div class="testbox">
       <form #reportForm = "ngForm" (ngSubmit) = "onClickSubmit(reportForm.value)">
+        
         <h1>Complaint Form</h1>
+
         <p>Please send us details about the incident you would like to report. Our Complaint Center will analyze your complaint and take the appropriate measures in order that the reported situation will not occur at any other time in the future.</p>
         <hr/>
+
         <div class="item">
           <p>Date of complaint</p>
           <input type="date" name="dateOfComp" required ngModel>
           <i class="fas fa-calendar-alt"></i>
         </div>
+
         <div class="item">
           <p>Name</p>
           <input type="text" name="fName" placeholder="First" ngModel>
           <input type="text" name="lName" placeholder="Last" ngModel>
         </div>
+
         <div class="item">
           <p>Email</p>
           <input type="text" name="email" ngModel>
         </div>
+
         <div class="item address">
           <p>Store Address</p>
           <div class="street">
@@ -26,6 +32,7 @@
             <input type="text" name="city" placeholder="City" ngModel>
             <input type="text" name="region" placeholder="Region" ngModel>
             <input type="text" name="pCode" placeholder="Postal / zip code" ngModel>
+            
             <select name="sLocation" ngModel>
               <option value="">Store location</option>
               <option value="CBD Store">CBD store</option>
@@ -36,31 +43,39 @@
             </select>
           </div>
         </div>
+
         <div class="item">
           <p>Date of the reported incident</p>
           <input type="date" name="date" required ngModel>
           <i class="fas fa-calendar-alt"></i>
         </div>
+
         <div class="item location">
           <p>Incident location</p>
           <input type="incLocation" name="name" ngModel>
         </div>
+
         <div class="item complaint-details">
           <p>Complaint details</p>
           <div class="complaint-details-item">
             <textarea name="compDetails" rows="5" ngModel></textarea>
           </div>
         </div>
+
         <div class="item desired-outcome">
           <p>Desired outcome</p>
+
           <div class="desired-outcome-item">
             <textarea name="desiredOutcome" rows="5" ngModel></textarea>
             <small>By signing you declare that all information you have entered is truthful and accurate.</small>
           </div>
         </div>
+
         <h4>Your signature</h4>
+
         <textarea name="signature" rows="5" ngModel></textarea>
         <small>By signing you declare that all information you have entered is truthful and accurate.</small>
+        
         <div class="btn-block">
           <button type="submit">Send</button>
         </div>

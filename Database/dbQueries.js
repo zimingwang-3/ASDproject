@@ -3,6 +3,9 @@ const connect = connection.connect;
 const disconnect = connection.disconnect;
 const getMongoClient = connection.getMongoClient;
 
+var ObjectId = require('mongodb').ObjectId; 
+
+
 async function getAllUsers() {
     //connect to db
     let client = getMongoClient();
@@ -55,17 +58,39 @@ async function userIncidents(account){
     const fetchedIncidents = await client.db("ASDdata").collection("Complaints").find(account).toArray();
     return fetchedIncidents;
 }
+async function userIncident(account,CID){
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+    console.log("ACCOUNT NUMBER: ", account)
+    //query DB. add incident report
+    const fetchedIncident = await client.db("ASDdata").collection("Complaints").findOne({_id: ObjectId(CID)});
+    return fetchedIncident;
+}
+
 async function updateIncident(incident, update){
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+    console.log(incident);
+    //query DB. add incident report
+    const updateIncident = await client.db("ASDdata").collection("Complaints").updateOne(
+        { _id: ObjectId(incident._id), userId: incident.userId }, 
+        { $set: update });
+
+    return updateIncident;
+}
+async function deleteIncident(incidentID, userID) {
     //connect to db
     let client = getMongoClient();
     await connect(client);
 
     //query DB. add incident report
-    const fetchedIncidents = await client.db("ASDdata").collection("Complaints").updateOne(incident, update).toArray();
+    const fetchedIncidents = await client.db("ASDdata").collection("Complaints").deleteOne({_id: ObjectId(incidentID), userId: userID});
     return fetchedIncidents;
 }
 
 
 module.exports = {
-    getAllUsers: getAllUsers, addUser, findUser, reportIncident, userIncidents
+    getAllUsers: getAllUsers, addUser, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident
 };
