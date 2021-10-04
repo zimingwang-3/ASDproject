@@ -90,7 +90,44 @@ async function deleteIncident(incidentID, userID) {
     return fetchedIncidents;
 }
 
+async function AdminDeleteIncident(incidentID) {
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //query DB. add incident report
+    const fetchedIncidents = await client.db("ASDdata").collection("Complaints").deleteOne({_id: ObjectId(incidentID)});
+    return fetchedIncidents;
+}
+
+async function allIndcidents() {
+    let client = getMongoClient();
+    await connect(client);
+
+    const fetchedIncidents = await client.db("ASDdata").collection("Complaints").find().toArray();
+    return fetchedIncidents;
+}
+
+async function getAllStores() {
+    let client = getMongoClient();
+    await connect(client);
+
+    const fetchedStores = await client.db("ASDdata").collection("SCentres").find().toArray();
+    return fetchedStores;
+}
+
+async function addStore(store, centre) {
+    let client = getMongoClient();
+    await connect(client);
+
+    const addedStore = await client.db("ASDdata").collection("SCentres").updateOne(
+        { Name: centre }, 
+        { $push: { Stores: store } });
+
+    return addedStore;
+
+}
 
 module.exports = {
-    getAllUsers: getAllUsers, addUser, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident
+    getAllUsers: getAllUsers, addUser, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, AdminDeleteIncident, allIndcidents, getAllStores, addStore
 };
