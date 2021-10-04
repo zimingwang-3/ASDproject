@@ -8,11 +8,12 @@ export class StoreManageService {
 
   constructor(private http: HttpClient) { }
 
-  fetchAllStores() {
-    return this.http.get("http://localhost:3500/allStores");
+  fetchAllStores(token) {
+    return this.http.post("http://localhost:3500/allStores", {token: token});
   }
 
-  addStore(data) {
+  addStore(data, token) {
+    data.token = token;
     return this.http.post("http://localhost:3500/addStore", data);
   }
 }

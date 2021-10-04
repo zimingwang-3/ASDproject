@@ -45,9 +45,10 @@ export class ExportCsvComponent implements OnInit {
   }
 
   async getFormData() {
+    this.token = this.cookieService.get('access-token')
     this.admin = await this.authService.verifyAdmin();
     if (this.admin) {
-      this.complaintsAPI.showAllComplaints().subscribe(data => this.complaints = data);
+      this.complaintsAPI.showAllComplaints(this.token).subscribe(data => this.complaints = data);
     } else {
       this.complaintsAPI.showUserComplaints({token: this.token}).subscribe(data => this.complaints = data);
     }

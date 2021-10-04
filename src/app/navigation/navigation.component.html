@@ -1,4 +1,5 @@
 <ul>
+    <li *ngIf="user == true"><a routerLink='/account'>Account</a></li>
     <li *ngIf="user == true"><a routerLink='/csv'>Incident Report List</a></li>
     <li *ngIf="user == false"><a routerLink='/login'>Login</a></li>
     <li *ngIf="admin == true"><a routerLink='/add-employee'>Add user</a></li>
