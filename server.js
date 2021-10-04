@@ -67,11 +67,16 @@ app.post('/deleteComplaint',verify, async (req, res) => {
 
 app.post('/updateComplaint',verify, async (req, res) => {
   try {
-    update = await db.userIncidents({userId: req.body.user._id, _id: req.body._id}, req.body.update);
-    res.send({status: true});
+    update = await db.updateIncident({
+      userId: req.body.user._id,
+      _id: req.body.id
+    }, req.body.update);
+
+    console.log(update);
+    res.send({status: "updated incident successfully"});
   } catch (error) {
     console.log(error);
-    res.send({status: false})
+    res.send({status: "error updating incident"})
   }
 });
 
@@ -132,7 +137,7 @@ app.post('/register', async (req,res) => {
 })
 
 function verify(req,res,next) {
-  console.log("verify function: ",req.body)
+  console.log("verify function t: ",req.body)
   const token = req.body.token;
   if(!token) return res.send('Access Denied no access token: '+ token);
   try {

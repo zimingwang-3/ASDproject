@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ExportCsvService {
+
   constructor(private http: HttpClient) { }
+
 
   showUserComplaints(user){
     return this.http.post("http://localhost:3500/fetchComplaints", user);
@@ -15,8 +17,9 @@ export class ExportCsvService {
     return this.http.post("http://localhost:3500/fetchComplaint", {complaintId: complaintId, token: token})
   }
 
-  updateIncident(id, update, token) {
-    return this.http.post("http://localhost:3500/updateIncident", 
+  updateIncident(token, id, update) {
+    console.log("token = ", token, "| id = ", id, "| update = " , update)
+    return this.http.post("http://localhost:3500/updateComplaint", 
     {
       token: token, 
       id: id, 

@@ -72,10 +72,13 @@ async function updateIncident(incident, update){
     //connect to db
     let client = getMongoClient();
     await connect(client);
-
+    console.log(incident);
     //query DB. add incident report
-    const fetchedIncidents = await client.db("ASDdata").collection("Complaints").updateOne(incident, update).toArray();
-    return fetchedIncidents;
+    const updateIncident = await client.db("ASDdata").collection("Complaints").updateOne(
+        { _id: ObjectId(incident._id), userId: incident.userId }, 
+        { $set: update });
+
+    return updateIncident;
 }
 async function deleteIncident(incidentID, userID) {
     //connect to db
