@@ -17,7 +17,9 @@ export class StoreManageComponent implements OnInit {
 
   addForm = new FormGroup({
     sCentre: new FormControl(''),
-    storeName: new FormControl(''),
+    sName: new FormControl(''),
+    sLocation: new FormControl(''),
+    sNumber: new FormControl(''),
   })
 
   deleteForm = new FormGroup({
@@ -33,7 +35,8 @@ export class StoreManageComponent implements OnInit {
   }
 
   async getData() {
-    this.storeService.fetchAllStores().subscribe(data => this.centres = data);
+    this.token = this.cookieService.get('access-token')
+    this.storeService.fetchAllStores(this.token).subscribe(data => this.centres = data);
   }
 
   addStore() {
@@ -47,7 +50,8 @@ export class StoreManageComponent implements OnInit {
   }
 
   addStoreSubmit() {
-    this.storeService.addStore(this.addForm.value).subscribe(data => this.status = data);
+    this.token = this.cookieService.get('access-token')
+    this.storeService.addStore({store: this.addForm.value}, this.token).subscribe(data => this.status = data);
   }
 
   deleteStoreSubmit() {

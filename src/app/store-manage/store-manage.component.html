@@ -1,53 +1,65 @@
-<body>
-    <div class="testbox">
-        <h1>Store Management</h1>
-    </div>
-    <div class="testbox">
-        <button class="button buttonStyle" (click)="addStore()">Add Store</button>
-        <button class="button buttonStyle" (click)="deleteStore()">Delete Store</button>
-    </div>
+<h1>Store Management</h1>
+<div class="buttonbox">
+    <button class="button buttonStyle" (click)="addStore()">Add Store</button>
+    <button class="button buttonStyle" (click)="deleteStore()">Delete Store</button>
+</div>
 
-    <div  [ngStyle]="{'display': displayPopUp1}" id="myModal" class="modal1">
-        <div class="modal-content">
+<div  [ngStyle]="{'display': displayPopUp1}" id="myModal" class="modal1">
+    <div class="modal-content">
+
+        <form [formGroup]="addForm" (ngSubmit) = "addStoreSubmit()">
+
             <span (click)="closeUpdateForm1()" class="close">&times;</span>
-            <div class="testbox">
-                <form [formGroup]="addForm" (ngSubmit) = "addStoreSubmit()">
-                    <div>
-                        <select name="sCentre" formControlName="sCentre">
-                            <option value="" disabled selected>Store Location:</option>
-                            <option *ngFor="let centre of centres" [value]="centre.Name">
-                                {{centre.Name}}
-                            </option>
-                        </select>
-                          
-                        <p>New Store:</p>
-                        <input type="name" name="name" formControlName="storeName">
-                          
-                    </div>
-                    <div class="btn-block">
-                        <button type="submit">Send</button>
-                    </div>
-                    <p class="statusMessage" *ngIf="status">{{status.status}}</p>
-                </form>
+            <h1>Add store</h1>
+            <p style="text-align: center;">fill out this form to add a new store</p><br>
+            <div class="item">
+                <p for="sCentre">Shopping centre:</p>
+                <select name="sCentre" formControlName="sCentre">
+                    <option value="" disabled selected>Store Location:</option>
+                    <option *ngFor="let centre of centres" [value]="centre.Name">
+                        {{centre.Name}}
+                    </option>
+                </select><br>
             </div>
-        </div>
-    </div>
 
-    <div  [ngStyle]="{'display': displayPopUp2}" id="myModal" class="modal2">
-        <div class="modal-content">
-            <span (click)="closeUpdateForm2()" class="close">&times;</span>
-            <div class="testbox">
-                <form [formGroup]="deleteForm" (ngSubmit) = "deleteStoreSubmit()">
-                    <div>
-                        Delete Store:
-                        <select name="del" formControlName="del">
-                            <optgroup *ngFor = 'let centre of centres' label="{{centre.Name}}">
-                                <option *ngFor = 'let store of centre.Stores' [value]="store">{{store}}</option> 
-                            </optgroup>
-                        </select>
-                    </div>
-                </form>
+            <br><br><h1>Store details</h1>
+            <div class="item">
+                <p>storename:</p>
+                <input type="name" name="storeName" formControlName="sName">
             </div>
-        </div>
+            <div class="item">
+                <p for="storeName">store floor/location:</p>
+                <input type="name" name="storeName" formControlName="sLocation">
+            </div>
+
+            <div class="item">
+                <p for="storeName">store number:</p>
+                <input type="name" name="storeName" formControlName="sNumber">
+            </div>
+ 
+            <div class="btn">
+                <button type="submit">Send</button>
+            </div>
+
+            <p class="statusMessage" *ngIf="status">{{status.status}}</p>
+        </form>
+
     </div>
-</body>
+</div>
+
+<div  [ngStyle]="{'display': displayPopUp2}" id="myModal" class="modal2">
+    <div class="modal-content">
+        <form [formGroup]="deleteForm" (ngSubmit) = "deleteStoreSubmit()">
+            <span (click)="closeUpdateForm2()" class="close">&times;</span>
+
+            Delete Store:
+            <select name="del" formControlName="del">
+                <optgroup *ngFor = 'let centre of centres' label="{{centre.Name}}">
+                    <option *ngFor = 'let store of centre.Stores' [value]="store">{{store.sName}}</option> 
+                </optgroup>
+            </select>
+        </form>
+    </div>
+</div>
+
+

@@ -43,7 +43,9 @@ app.post('/api/submitComplaint',verify, async (req, res) => {
   }
 });
 app.post('/fetchComplaints',verify, async (req, res) => {
+  console.log(req.body);
   complaints = await db.userIncidents({userId: req.body.user._id});
+  console.log(complaints);
   res.send(complaints);
 });
 app.post('/fetchComplaint',verify, async (req, res) => {
@@ -90,7 +92,7 @@ app.post('/login', async (req,res) => {
   if(!req.body.password) return res.send({status: "password field empty"});
 
   //fetch user
-  const user = await db.findUser(req.body.user._id);
+  const user = await db.findUserByEmail(req.body.email);
 
   //check if user is found
   if(user == null){
@@ -119,24 +121,44 @@ app.post('/login', async (req,res) => {
 
 })
 app.post('/register', async (req,res) => {
+
   //data validation
   if(!req.body.email) return res.send({status: "email field empty"});
   if(!req.body.password) return res.send({status: "password field empty"});
 
-  //check if email exists
-  userEmail = await db.findUser({email: req.body.email});
-  if(userEmail) return res.send({status: "email exists: " + userEmail.email});
+  try {
+    //check if email exists
+    const userEmail = await db.findUserByEmail(req.body.email);
 
-  //check if employee ID exists
+    if(userEmail) return res.send({status: "email exists: " + userEmail.email});
+
+  } catch (error) {
+    res.send({status: "error checking email", error: error})
+  }
+  try {
+    console.log("STUPID FUCKING EID", req.body.eid)
+    //check if employee ID exists
+    const employeeDetails = await db.findID(req.body.eid);
+    console.log(employeeDetails)
+    if(!employeeDetails) return res.send({status: "employee ID is incorrect"})
+
+  } catch (error) {
+    console.log(error);
+    res.send({status: "error checking employee id", error: error})
+  }
 
   //hash user password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt)
   req.body.password = hashedPassword;
-  
-  //add user to mongoDB
-  db.addUser(req.body);
-  res.send({status: `added user`});
+  try {
+    //add user to mongoDB
+    db.addUser(req.body);
+    res.send({status: `added user`});
+  } catch (error) {
+    console.log(error);
+    res.send({status: `error registering user`});
+  }
 })
 app.post('/findUser',verify, async (req,res) => {
   //find user
@@ -168,23 +190,22 @@ app.post('/updateUser',verify, async (req, res) => {
 //admin end-points
 app.post('/registerAdmin',verifyAdmin, async (req,res) => {
   //data validation
-  if(!req.body.email) return res.send({status: "email field empty"});
-  if(!req.body.password) return res.send({status: "password field empty"});
+  if(!req.body.newUser.email) return res.send({status: "email field empty"});
+  if(!req.body.newUser.password) return res.send({status: "password field empty"});
 
   //check if email exists
-  userEmail = await db.findUser({email: req.body.email});
+  userEmail = await db.findUserByEmail(req.body.newUser.email);
   if(userEmail) return res.send({status: "email exists: " + userEmail.email});
   
   //hash user password
   const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt)
-  req.body.password = hashedPassword;
+  const hashedPassword = await bcrypt.hash(req.body.newUser.password, salt)
+  req.body.newUser.password = hashedPassword;
 
-  console.log(req.body);
   try {
     //add user to mongoDB
-    db.addUser(req.body);
-    res.send(`added user: ${req.body}`);
+    db.addUserAdmin(req.body.newUser);
+    res.send({status: "added user successfully"});
   } catch (error) {
     res.send({status: "error adding user"})
   }
@@ -253,21 +274,22 @@ app.post('/findAllUsers',verifyAdmin, async (req,res) => {
     res.send({status: "error fetching users"})
   }
 })
-app.get('/allComplaints',verifyAdmin, async (req,res) => {
-  complaints = await db.allIndcidents();
+app.post('/allComplaints',verifyAdmin, async (req,res) => {
+  complaints = await db.allIncidents();
+  
   res.send(complaints);
 })
 
 //store admin end-points
-app.get('/allStores',verifyAdmin, async (req,res) => {
+app.post('/allStores',verifyAdmin, async (req,res) => {
   stores = await db.getAllStores();
   console.log(stores);
   res.send(stores);
 })
 app.post('/addStore',verifyAdmin, async (req,res) => {
-  console.log(req.body.sCentre);
+  console.log(req.body.store);
   try {
-    add = await db.addStore(req.body.storeName, req.body.sCentre);
+    add = await db.addStore(req.body.store);
     console.log(add);
     res.send({status: "added store successfully"});
   } catch (error) {
@@ -292,7 +314,7 @@ function verify(req,res,next) {
   }
 }
 function verifyAdmin(req,res,next) {
-  console.log("verify function: ",req.body)
+  console.log("verifyAdmin function body: ", req.body)
   const token = req.body.token;
   if(!token) return res.send({status: 'Access Denied no access token: '+ token});
   try {

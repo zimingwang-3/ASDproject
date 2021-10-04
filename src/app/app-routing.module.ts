@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountComponent } from './account/account.component';
 import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/auth.guard';
 import { RoleService } from './auth/role.service';
@@ -11,6 +12,7 @@ import {ReportFormComponent} from './report-form/report-form.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
 
 const routes: Routes = [
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
   { path: 'csv', component: ExportCsvComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent, },
   { path: 'form', component: ReportFormComponent, canActivate: [AuthGuard]},
