@@ -1,0 +1,53 @@
+<body>
+    <div class="testbox">
+        <h1>Store Management</h1>
+    </div>
+    <div class="testbox">
+        <button class="button buttonStyle" (click)="addStore()">Add Store</button>
+        <button class="button buttonStyle" (click)="deleteStore()">Delete Store</button>
+    </div>
+
+    <div  [ngStyle]="{'display': displayPopUp1}" id="myModal" class="modal1">
+        <div class="modal-content">
+            <span (click)="closeUpdateForm1()" class="close">&times;</span>
+            <div class="testbox">
+                <form [formGroup]="addForm" (ngSubmit) = "addStoreSubmit()">
+                    <div>
+                        <select name="sCentre" formControlName="sCentre">
+                            <option value="" disabled selected>Store Location:</option>
+                            <option *ngFor="let centre of centres" [value]="centre.Name">
+                                {{centre.Name}}
+                            </option>
+                        </select>
+                          
+                        <p>New Store:</p>
+                        <input type="name" name="name" formControlName="storeName">
+                          
+                    </div>
+                    <div class="btn-block">
+                        <button type="submit">Send</button>
+                    </div>
+                    <p class="statusMessage" *ngIf="status">{{status.status}}</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div  [ngStyle]="{'display': displayPopUp2}" id="myModal" class="modal2">
+        <div class="modal-content">
+            <span (click)="closeUpdateForm2()" class="close">&times;</span>
+            <div class="testbox">
+                <form [formGroup]="deleteForm" (ngSubmit) = "deleteStoreSubmit()">
+                    <div>
+                        Delete Store:
+                        <select name="del" formControlName="del">
+                            <optgroup *ngFor = 'let centre of centres' label="{{centre.Name}}">
+                                <option *ngFor = 'let store of centre.Stores' [value]="store">{{store}}</option> 
+                            </optgroup>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

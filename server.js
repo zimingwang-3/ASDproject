@@ -183,6 +183,24 @@ app.get('/allComplaints', async (req,res) => {
   res.send(complaints);
 })
 
+app.get('/allStores', async (req,res) => {
+  stores = await db.getAllStores();
+  console.log(stores);
+  res.send(stores);
+})
+
+app.post('/addStore', async (req,res) => {
+  console.log(req.body.sCentre);
+  try {
+    add = await db.addStore(req.body.storeName, req.body.sCentre);
+    console.log(add);
+    res.send({status: "added store successfully"});
+  } catch (error) {
+    console.log(error);
+    res.send({status: "error adding store"})
+  }
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

@@ -108,7 +108,26 @@ async function allIndcidents() {
     return fetchedIncidents;
 }
 
+async function getAllStores() {
+    let client = getMongoClient();
+    await connect(client);
+
+    const fetchedStores = await client.db("ASDdata").collection("SCentres").find().toArray();
+    return fetchedStores;
+}
+
+async function addStore(store, centre) {
+    let client = getMongoClient();
+    await connect(client);
+
+    const addedStore = await client.db("ASDdata").collection("SCentres").updateOne(
+        { Name: centre }, 
+        { $push: { Stores: store } });
+
+    return addedStore;
+
+}
 
 module.exports = {
-    getAllUsers: getAllUsers, addUser, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, AdminDeleteIncident, allIndcidents
+    getAllUsers: getAllUsers, addUser, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, AdminDeleteIncident, allIndcidents, getAllStores, addStore
 };
