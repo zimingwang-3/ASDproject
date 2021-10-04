@@ -59,8 +59,12 @@ app.post('/fetchComplaint',verify, async (req, res) => {
 });
 
 app.post('/deleteComplaint',verify, async (req, res) => {
-
-  complaint = await db.deleteIncident(req.body.complaintId, req.body.user._id);
+  const userID = jwt.verify(req.body.token, process.env.ACCESS_SECRET);
+  if (userID.admin) {
+    complaint = await db.AdminDeleteIncident(req.body.complaintId);
+  } else {
+    complaint = await db.deleteIncident(req.body.complaintId, req.body.user._id);
+  }
   if(complaint.deletedCount == 1) res.send({status: "report deleted", return: complaint});
   if(complaint.deletedCount != 1) res.send({status: "report not deleted. Please try again"})
 });

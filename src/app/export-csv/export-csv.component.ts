@@ -88,7 +88,7 @@ export class ExportCsvComponent implements OnInit {
     console.log(incidentId)
     this.token = this.cookieService.get('access-token')
     this.complaintsAPI.deleteUserComplaint(incidentId, this.token).subscribe(data => this.status = data)
-    this.complaintsAPI.showUserComplaints({token: this.token}).subscribe(data => this.complaints = data);
+    this.getFormData();
   }
 
   exportComplaints(complaints){
