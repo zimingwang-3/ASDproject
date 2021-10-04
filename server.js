@@ -21,6 +21,7 @@ app.get('/', async (req, res) => {
     res.redirect(`${frontEndURL}:${frontEndHostPort}`);
 });
 
+//complaint end-points
 app.post('/api/submitComplaint',verify, async (req, res) => {
   if(!req.body.token) {
     res.send({status: "user not logged in"});
@@ -41,7 +42,6 @@ app.post('/api/submitComplaint',verify, async (req, res) => {
     });
   }
 });
-
 app.post('/fetchComplaints',verify, async (req, res) => {
   complaints = await db.userIncidents({userId: req.body.user._id});
   res.send(complaints);
@@ -57,14 +57,12 @@ app.post('/fetchComplaint',verify, async (req, res) => {
     res.send({status: error})
   }
 });
-
 app.post('/deleteComplaint',verify, async (req, res) => {
 
   complaint = await db.deleteIncident(req.body.complaintId, req.body.user._id);
   if(complaint.deletedCount == 1) res.send({status: "report deleted", return: complaint});
   if(complaint.deletedCount != 1) res.send({status: "report not deleted. Please try again"})
 });
-
 app.post('/updateComplaint',verify, async (req, res) => {
   try {
     update = await db.updateIncident({
@@ -88,7 +86,7 @@ app.post('/login', async (req,res) => {
   if(!req.body.password) return res.send({status: "password field empty"});
 
   //fetch user
-  const user = await db.findUser({"email": req.body.email});
+  const user = await db.findUser(req.body.user._id);
 
   //check if user is found
   if(user == null){
@@ -116,8 +114,55 @@ app.post('/login', async (req,res) => {
   }
 
 })
-
 app.post('/register', async (req,res) => {
+  //data validation
+  if(!req.body.email) return res.send({status: "email field empty"});
+  if(!req.body.password) return res.send({status: "password field empty"});
+
+  //check if email exists
+  userEmail = await db.findUser({email: req.body.email});
+  if(userEmail) return res.send({status: "email exists: " + userEmail.email});
+
+  //check if employee ID exists
+
+  //hash user password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt)
+  req.body.password = hashedPassword;
+  
+  //add user to mongoDB
+  db.addUser(req.body);
+  res.send({status: `added user`});
+})
+app.post('/findUser',verify, async (req,res) => {
+  //find user
+  try {
+    user = await db.findUser(req.body.user._id);
+    res.send(user);
+  } catch (error) {
+    res.send({status: "user not found"})
+  }
+})
+app.post('/deleteUser',verify, async (req, res) => {
+  employee = await db.deleteUser(req.body.user._id);
+
+  if(employee.deletedCount == 1) res.send({status: "report deleted", return: employee});
+  if(employee.deletedCount != 1) res.send({status: "report not deleted. Please try again"})
+});
+app.post('/updateUser',verify, async (req, res) => {
+  try {
+    update = await db.updateUser(req.body.user._id, req.body.update);
+    console.log(update);
+    res.send({status: "updated user records"});
+  } catch (error) {
+    console.log(error);
+    res.send({status: "error updating user"})
+  }
+});
+
+
+//admin end-points
+app.post('/registerAdmin',verifyAdmin, async (req,res) => {
   //data validation
   if(!req.body.email) return res.send({status: "email field empty"});
   if(!req.body.password) return res.send({status: "password field empty"});
@@ -130,14 +175,83 @@ app.post('/register', async (req,res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt)
   req.body.password = hashedPassword;
-  
-  //add user to mongoDB
-  db.addUser(req.body);
-  res.send(`added user: ${req.body}`);
-})
 
+  console.log(req.body);
+  try {
+    //add user to mongoDB
+    db.addUser(req.body);
+    res.send(`added user: ${req.body}`);
+  } catch (error) {
+    res.send({status: "error adding user"})
+  }
+})
+app.post('/addEmployee',verifyAdmin, async (req,res) => {
+  //data validation
+  if(!req.body.eid) return res.send({status: "employee id field is empty"});
+  if(!req.body.fName) return res.send({status: "first name field is empty"});
+  if(!req.body.lName) return res.send({status: "last name field is empty"});
+  if(!req.body.storeId) return res.send({status: "store field is empty"});
+  if(!req.body.centreId) return res.send({status: "centre field is empty"});
+
+  //check if ID exists
+  //user = await db.findID(req.body.eid);
+  //if(user) return res.send({status: "employee exists: " + user.eid});
+  
+  try {
+    //add user to mongoDB
+    db.addID(req.body);
+    res.send({status: `added employee ID`});
+  } catch (error) {
+    res.send({status: error});
+  }
+})
+app.post('/findEmployee',verifyAdmin, async (req, res) => {
+  try {
+    employee = await db.findID(req.body.eid);
+    console.log(employee);
+    res.send(employee);
+  } catch (error) {
+    console.log(error);
+    res.send({status: error})
+  }
+});
+app.post('/findAllEmployees',verifyAdmin, async (req, res) => {
+  try {
+    employee = await db.findAllID();
+    res.send(employee);
+  } catch (error) {
+    console.log(error);
+    res.send({status: error})
+  }
+});
+app.post('/deleteEmployee',verifyAdmin, async (req, res) => {
+  employee = await db.deleteID(req.body.eid);
+  console.log(employee);
+  if(employee.deletedCount == 1) res.send({status: "report deleted", return: employee});
+  if(employee.deletedCount != 1) res.send({status: "report not deleted. Please try again"})
+});
+app.post('/updateEmployee',verifyAdmin, async (req, res) => {
+  try {
+    update = await db.updateID(req.body.eid, req.body.update);
+    console.log(update);
+    res.send({status: "updated employee records"});
+  } catch (error) {
+    console.log(error);
+    res.send({status: "error updating employee"})
+  }
+});
+app.post('/findAllUsers',verifyAdmin, async (req,res) => {
+  //find all user
+  try {
+    user = await db.findAllUsers();
+    res.send(user);
+  } catch (error) {
+    res.send({status: "error fetching users"})
+  }
+})
+//verify end-points
 function verify(req,res,next) {
-  console.log("verify function t: ",req.body)
+  console.log("verify function: ",req.body)
   const token = req.body.token;
   if(!token) return res.send('Access Denied no access token: '+ token);
   try {
@@ -149,7 +263,21 @@ function verify(req,res,next) {
       res.send("access token invalid");
   }
 }
+function verifyAdmin(req,res,next) {
+  console.log("verify function: ",req.body)
+  const token = req.body.token;
+  if(!token) return res.send({status: 'Access Denied no access token: '+ token});
+  try {
+      const user = jwt.verify(token, process.env.ACCESS_SECRET);
+      req.body.user = user;
+      if(!user.admin) res.send({status: "access token invalid"});
+      if(user.admin) next();
 
+  } catch (error) {
+    console.log(error);
+      res.send({status: "access token invalid"});
+  }
+}
 app.post('/verify', async (req,res) => {
   const token = req.body.token;
 
@@ -173,7 +301,6 @@ app.post('/verify', async (req,res) => {
     });
   }
 })
-
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

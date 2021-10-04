@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuard } from './auth/auth.guard';
 import { RoleGuard } from './auth/auth.guard';
+import { AccountComponent } from './account/account.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { RoleGuard } from './auth/auth.guard';
     ExportCsvComponent,
     LoginComponent,
     NavigationComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    AccountComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

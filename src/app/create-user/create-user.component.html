@@ -3,28 +3,18 @@
 Author: Luke Galic
 Student number: 13564810
 -->
-<html>
-    <head>
-        <title>Login!</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!--</script><script  src="./script.js"></script>-->
-    </head>
-    <body>
+<h1>Add user</h1>
+<form #registerForm = "ngForm" (ngSubmit) = "register(registerForm.value)">
+  <div class="container">
+      <label for="id"><b>employee ID (provided)</b></label>
+      <input type="text" placeholder="Enter ID" name="id" required  ngModel>
 
-        <h1>Add user</h1>
-
-        <form>
-            <div class="container">
-              <label for="uname"><b>email</b></label>
-              <input type="text" placeholder="Enter Username" name="uname" required>
+      <label for="uname"><b>email</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required ngModel>
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required ngModel>
           
-              <label for="psw"><b>Password</b></label>
-              <input type="password" placeholder="Enter Password" name="psw" required>
-                  
-              <button type="submit">Add</button>
-            </div>
-          </form>
-
-    </body>
-</html>
+      <button type="submit">Add</button>
+  </div>
+</form>

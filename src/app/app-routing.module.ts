@@ -6,13 +6,15 @@ import { RoleService } from './auth/role.service';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ExportCsvComponent } from './export-csv/export-csv.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import {ReportFormComponent} from './report-form/report-form.component';
 
 const routes: Routes = [
   { path: 'csv', component: ExportCsvComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent, },
   { path: 'form', component: ReportFormComponent, canActivate: [AuthGuard]},
-  { path: 'register', component: CreateUserComponent, canActivate: [RoleService]}
+  { path: 'add-employee', component: CreateUserComponent, canActivate: [RoleService]},
+  { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({
