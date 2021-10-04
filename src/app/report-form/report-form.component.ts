@@ -20,10 +20,6 @@ export class ReportFormComponent implements OnInit {
     this.submitComplaint(data);
   }
 
-  updateIncident(incidentId, update) {
-    
-  }
-
   async submitComplaint(data): Promise<void> {
     
     data.token = this.cookieService.get("access-token")

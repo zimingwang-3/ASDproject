@@ -11,6 +11,10 @@ export class ExportCsvService {
     return this.http.post("http://localhost:3500/fetchComplaints", user);
   }
 
+  fetchUserComplaint(complaintId, token) {
+    return this.http.post("http://localhost:3500/fetchComplaint", {complaintId: complaintId, token: token})
+  }
+
   updateIncident(id, update, token) {
     return this.http.post("http://localhost:3500/updateIncident", 
     {

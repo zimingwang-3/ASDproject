@@ -9,7 +9,12 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ExportCsvComponent implements OnInit {
   complaints: any;
+  complaint: any;
   token: any;
+  status: any;
+  reportForm: any;
+  displayPopUp: any = "none";
+
   constructor(private complaintsAPI: ExportCsvService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
@@ -18,11 +23,35 @@ export class ExportCsvComponent implements OnInit {
     this.complaintsAPI.showUserComplaints({token: this.token}).subscribe(data => this.complaints = data);
   }
 
-  fetchComplaints(user){
-    //placeholder
+  //display the pop up windo
+  updateForm(incidentId) {
+    this.token = this.cookieService.get('access-token') 
+    this.complaintsAPI.fetchUserComplaint(incidentId, this.token).subscribe(data => {
+      this.complaint = data;
+      console.log(this.complaint);
+    } );
+
+    this.displayPopUp = "block";
+  }
+
+  updateIncident(update) {
+    console.log(this.reportForm);
+  }
+
+  //Close the pop up window
+  closeUpdateForm() {
+    this.displayPopUp = "none";
+  }
+
+  deleteIncident(incidentId) {
+    console.log(incidentId)
+    this.token = this.cookieService.get('access-token')
+    this.complaintsAPI.deleteUserComplaint(incidentId, this.token).subscribe(data => this.status = data)
+    this.complaintsAPI.showUserComplaints({token: this.token}).subscribe(data => this.complaints = data);
   }
 
   exportComplaints(complaints){
     //placeholder
   }
+
 }
