@@ -13,6 +13,10 @@ export class ExportCsvService {
     return this.http.post("http://localhost:3500/fetchComplaints", user);
   }
 
+  showAllComplaints() {
+    return this.http.get("http://localhost:3500/allComplaints");
+  }
+
   fetchUserComplaint(complaintId, token) {
     return this.http.post("http://localhost:3500/fetchComplaint", {complaintId: complaintId, token: token})
   }

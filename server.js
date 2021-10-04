@@ -174,6 +174,10 @@ app.post('/verify', async (req,res) => {
   }
 })
 
+app.get('/allComplaints', async (req,res) => {
+  complaints = await db.allIndcidents();
+  res.send(complaints);
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

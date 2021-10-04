@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExportCsvService } from './export-csv.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-export-csv',
@@ -33,12 +34,23 @@ export class ExportCsvComponent implements OnInit {
     signature: new FormControl(''),
   })
 
-  constructor(private complaintsAPI: ExportCsvService, private cookieService: CookieService) { }
+  constructor(private complaintsAPI: ExportCsvService, private cookieService: CookieService, private authService: AuthService) { }
+
+  admin;
 
   ngOnInit(): void {
     //HARD CODED VARIABLE (TESTING ONLY)
     this.token = this.cookieService.get('access-token') //"614a4a3bd1bd601ebb61fd59"
-    this.complaintsAPI.showUserComplaints({token: this.token}).subscribe(data => this.complaints = data);
+    this.getFormData();
+  }
+
+  async getFormData() {
+    this.admin = await this.authService.verifyAdmin();
+    if (this.admin) {
+      this.complaintsAPI.showAllComplaints().subscribe(data => this.complaints = data);
+    } else {
+      this.complaintsAPI.showUserComplaints({token: this.token}).subscribe(data => this.complaints = data);
+    }
   }
 
   //display the pop up windo
