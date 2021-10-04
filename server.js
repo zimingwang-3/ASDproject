@@ -253,6 +253,29 @@ app.post('/findAllUsers',verifyAdmin, async (req,res) => {
     res.send({status: "error fetching users"})
   }
 })
+app.get('/allComplaints',verifyAdmin, async (req,res) => {
+  complaints = await db.allIndcidents();
+  res.send(complaints);
+})
+
+//store admin end-points
+app.get('/allStores',verifyAdmin, async (req,res) => {
+  stores = await db.getAllStores();
+  console.log(stores);
+  res.send(stores);
+})
+app.post('/addStore',verifyAdmin, async (req,res) => {
+  console.log(req.body.sCentre);
+  try {
+    add = await db.addStore(req.body.storeName, req.body.sCentre);
+    console.log(add);
+    res.send({status: "added store successfully"});
+  } catch (error) {
+    console.log(error);
+    res.send({status: "error adding store"})
+  }
+})
+
 //verify end-points
 function verify(req,res,next) {
   console.log("verify function: ",req.body)
@@ -303,29 +326,6 @@ app.post('/verify', async (req,res) => {
       verification: false,
       admin: false
     });
-  }
-})
-
-app.get('/allComplaints', async (req,res) => {
-  complaints = await db.allIndcidents();
-  res.send(complaints);
-})
-
-app.get('/allStores', async (req,res) => {
-  stores = await db.getAllStores();
-  console.log(stores);
-  res.send(stores);
-})
-
-app.post('/addStore', async (req,res) => {
-  console.log(req.body.sCentre);
-  try {
-    add = await db.addStore(req.body.storeName, req.body.sCentre);
-    console.log(add);
-    res.send({status: "added store successfully"});
-  } catch (error) {
-    console.log(error);
-    res.send({status: "error adding store"})
   }
 })
 
