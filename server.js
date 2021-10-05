@@ -123,6 +123,7 @@ app.post('/login', async (req,res) => {
 app.post('/register', async (req,res) => {
 
   //data validation
+  if(!req.body.eid) return res.send({status: "id field empty"});
   if(!req.body.email) return res.send({status: "email field empty"});
   if(!req.body.password) return res.send({status: "password field empty"});
 

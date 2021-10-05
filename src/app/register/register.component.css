@@ -3,7 +3,17 @@ form {
     width: 20%;
     margin: auto;
 }
-
+button[disabled] {
+  background-color: gray;
+  color: rgb(219, 219, 219);
+  cursor: not-allowed;
+}
+input.ng-invalid {
+  border-color: red !important;
+}
+input.ng-valid {
+  border-color: green !important;
+}
 h1 {
     text-align: center;
 }
