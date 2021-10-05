@@ -28,7 +28,7 @@ app.post('/api/submitComplaint',verify, async (req, res) => {
   }
   try {
     const userID = jwt.verify(req.body.token, process.env.ACCESS_SECRET);
-    complaint = req.body;
+    complaint = req.body.complaint;
     complaint.userId = userID._id;
     delete complaint.token;
     db.reportIncident(complaint);
@@ -237,6 +237,7 @@ app.post('/updateUserPassword',verify, async (req, res) => {
 });
 
 //admin end-points
+
 app.post('/registerAdmin',verifyAdmin, async (req,res) => {
   //data validation
   if(!req.body.newUser.email) return res.send({status: "email field empty"});
@@ -330,7 +331,7 @@ app.post('/allComplaints',verifyAdmin, async (req,res) => {
 })
 
 //store admin end-points
-app.post('/allStores',verifyAdmin, async (req,res) => {
+app.post('/allStores',verify, async (req,res) => {
   stores = await db.getAllStores();
   console.log(stores);
   res.send(stores);

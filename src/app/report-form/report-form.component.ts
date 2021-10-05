@@ -1,5 +1,8 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { ReportFormService } from './report-form.service';
 
 @Component({
   selector: 'app-report-form',
@@ -8,17 +11,58 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ReportFormComponent implements OnInit {
   URL = 'http://localhost:3500'
+  dateTime = new Date()
+  currentdate:any = formatDate(this.dateTime, 'dd-MM-yyyy', 'en-US')
+  centres: any;
+  sCentre: any;
+  centreOption: any;
+  centrePicked: boolean = false;
+  status: Object;
 
-
-  constructor(private cookieService: CookieService) { }
-
+  constructor(private cookieService: CookieService, private api:ReportFormService) { }
+  reportForm = new FormGroup({
+    dateOfComp: new FormControl(this.currentdate),
+    fName: new FormControl(),
+    lName: new FormControl(),
+    email: new FormControl(),
+    centreLocation: new FormControl(),
+    storeLocation: new FormControl(),
+    incidentDate: new FormControl(),
+    incidentLocation: new FormControl(),
+    compDetails: new FormControl(),
+    desiredOutcome: new FormControl(),
+    signature: new FormControl(),
+  })
   ngOnInit(): void {
+    this.fetchCentres();
   }
 
-  onClickSubmit(data) {
-    data.token = this.cookieService.get('access-token');
-    this.submitComplaint(data);
+  onClickSubmit() {
+    const form = this.reportForm.value;
+    const token = this.cookieService.get('access-token');
+    this.api.submitComplaint(token, form).subscribe(data => this.status = data);
   }
+  fetchCentres(){
+    const token = this.cookieService.get('access-token');
+    this.api.fetchStores(token).subscribe(data => {
+      this.centres = data;
+      console.log(this.centres)
+    });
+  }
+  changeCentre(){
+    this.centreOption = this.reportForm.get("centreLocation").value;
+    this.fetchStores();
+  }
+  fetchStores(){
+    //fetch user option from form
+    var centreOption = this.centreOption;
+
+    //find all stores in centre
+    this.sCentre = this.centres.find((centre) => centre.name == centreOption)
+    this.centrePicked = true;
+  }
+
+
 
   async submitComplaint(data): Promise<void> {
     

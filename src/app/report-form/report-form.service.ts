@@ -8,12 +8,10 @@ export class ReportFormService {
 
   constructor(private http: HttpClient) { }
 
-  updateIncident(id, update, token) {
-    return this.http.post("http://localhost:3500/updateIncident", 
-    {
-      token: token, 
-      id: id, 
-      update: update
-    })
+  fetchStores(token) {
+    return this.http.post("http://localhost:3500/allStores", {token: token}) 
+  }
+  submitComplaint(token, complaint){
+    return this.http.post("http://localhost:3500/api/submitComplaint", {token: token, complaint: complaint})
   }
 }
