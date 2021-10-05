@@ -16,7 +16,6 @@
     display: block;
     margin-top: 15px;
   }
-  
   #incidentTable tr:nth-child(even){background-color: #f2f2f2;}
   
   #incidentTable tr:hover {background-color: #ddd;}
@@ -24,7 +23,7 @@
   #incidentTable th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
+    text-align: center;
     background-color: #000000;
     color: white;
   }
