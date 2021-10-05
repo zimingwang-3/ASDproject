@@ -177,7 +177,19 @@ async function addStore(store) {
         { $push: { stores: store } });
 
     return addedStore;
+}
 
+async function deleteStore(store) {
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //query DB. delete
+    centre = store.sCentre;
+    delete store.sCentre
+    const fetchedIncidents = await client.db("ASDdata").collection("SCentres").deleteOne(
+        {name: centre}, { Stores: { $pull: {sName: store}}});
+    return fetchedIncidents;
 }
 
 //centre employee queries (admin queries)
@@ -245,5 +257,5 @@ async function updateID(eid, update){
 }
 
 module.exports = {
-    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail
+    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail, deleteStore
 };

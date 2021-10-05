@@ -14,6 +14,10 @@ export class StoreManageComponent implements OnInit {
   centres: any;
   token: any;
   status: any;
+  test: any;
+  centre = {
+    stores: [{sName: "loading..."}]
+  };
 
   addForm = new FormGroup({
     sCentre: new FormControl(''),
@@ -23,8 +27,8 @@ export class StoreManageComponent implements OnInit {
   })
 
   deleteForm = new FormGroup({
-    del: new FormControl(''),
-    
+    sCentre: new FormControl(''),
+    sName: new FormControl('')
   })
 
   constructor(private cookieService: CookieService, private storeService: StoreManageService) { }
@@ -36,7 +40,7 @@ export class StoreManageComponent implements OnInit {
 
   async getData() {
     this.token = this.cookieService.get('access-token')
-    this.storeService.fetchAllStores(this.token).subscribe(data => this.centres = data);
+    this.storeService.fetchAllStores(this.token).subscribe(data => {this.centres = data; console.log(this.centres);});
   }
 
   addStore() {
@@ -55,8 +59,19 @@ export class StoreManageComponent implements OnInit {
   }
 
   deleteStoreSubmit() {
-
+    this.token = this.cookieService.get('access-token')
+    this.storeService.deleteStore({store: this.deleteForm.value}, this.token).subscribe(data => this.status = data);
   }
+  
+  changeCentre() {
+    this.centre = this.deleteForm.get('sCentre').value;
+    this.centres.forEach( (element) => {
+      if(element.name == this.centre) {
+        this.centre = element
+      }
+  });
+  }
+
 
   closeUpdateForm1() {
     this.displayPopUp1 = "none";
@@ -66,3 +81,9 @@ export class StoreManageComponent implements OnInit {
     this.displayPopUp2 = "none";
   }
 }
+
+/*<select name="del" formControlName="sName">
+                <optgroup *ngFor = 'let centre of centres' label="{{centre.name}}">
+                    <option *ngFor = 'let store of centre.stores' [value]="store">{{store.sName}}</option> 
+                </optgroup>
+            </select>*/
