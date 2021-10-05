@@ -9,16 +9,13 @@ Student number: 13571601
       <label for="name"><b>Offender Name</b></label>
       <input type="text" placeholder="Enter Name" name="name" required  ngModel>
 
-      <label for="offence"><b>Offence Committed</b></label>
-      <input type="text" placeholder="Enter Offence Committed" name="offence" required ngModel>
+      <label for="reportID"><b>Report ID</b></label>
+      <input type="text" placeholder="Enter Offence Committed" name="reportID" required ngModel>
 
-      <label for="description"><b>Description Of Person</b></label>
+      <label for="description"><b>Brief Description Of Person</b></label>
       <input type="text" placeholder="Enter Description" name="description" required ngModel>
 
-      <label for="location"><b>Location</b></label><br>
-      <input type="text" placeholder="Enter Location" name="location" required ngModel>
-
-      <button type="submit">ADD</button>
+      <button type="submit">Add Offender</button>
       <p *ngIf="status">{{status.status}}</p>
   </div>
 </form>
