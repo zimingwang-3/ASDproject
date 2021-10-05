@@ -18,4 +18,13 @@ export class UserListService {
   fetchUser(userID, token) {
     return this.http.post('http://localhost:3500/findUserAdmin', {token: token, _id: userID});
   }
+
+  updateUser(userID, token, update) {
+    return this.http.post('http://localhost:3500/updateUserAdmin', {token: token, _id: userID, update: update});
+  }
+
+  deleteUser(userID, token) {
+    return this.http.post('http://localhost:3500/deleteUserAdmin', {token: token, _id: userID})
+  }
+
 }

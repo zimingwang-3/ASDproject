@@ -18,11 +18,8 @@ export class UserListComponent implements OnInit {
   user: any;
 
   userForm = new FormGroup({
-    _id: new FormControl(''),
     eid: new FormControl(''),
     email: new FormControl(''),
-    admin: new FormControl(''),
-    token: new FormControl(''),
   })
 
   constructor(private cookieService: CookieService, private userService: UserListService, private authService: AuthService) { }
@@ -57,8 +54,17 @@ export class UserListComponent implements OnInit {
       this.displayPopUp = "block";
   }
 
-  updateUser() {
+  updateUser(userID) {
+    this.token = this.cookieService.get('access-token') 
+    this.userService.updateUser(userID, this.token, this.userForm.value)
+                      .subscribe(data => this.status = data);
+    this.getUserData();
+  }
 
+  deleteUser(userID) {
+    this.token = this.cookieService.get('access-token')
+    this.userService.deleteUser(userID, this.token).subscribe(data => this.status = data)
+    this.getUserData();
   }
 
 }

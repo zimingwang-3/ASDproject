@@ -14,7 +14,7 @@
           <td>{{user.email}}</td>
           <td>{{user.admin}}</td>
           <td><img width="25px" height="25px" src="assets/images/edit.png" alt="edit" (click)="updateForm(user._id)"></td>
-          <td><img width="25px" height="25px" src="assets/images/bin.png" alt="delete"></td>
+          <td><img width="25px" height="25px" src="assets/images/bin.png" alt="delete" (click)="deleteUser(user._id)"></td>
       </tr>
     </table>
 
@@ -22,7 +22,7 @@
           <div class="modal-content">
             <span (click)="closeUpdateForm()" class="close">&times;</span>
             <div class="testbox">
-              <form [formGroup]="userForm" (ngSubmit)="updateUser()">
+              <form [formGroup]="userForm" (ngSubmit)="updateUser(user._id)">
                 
                 <h1>Update User form</h1>
                 <hr/>
@@ -47,5 +47,5 @@
             </div>
           </div>
       </div>
-    
+      <p class="statusMessage" *ngIf="status">{{status.status}}</p>
 </body>
