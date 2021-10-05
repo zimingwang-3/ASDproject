@@ -168,6 +168,17 @@ app.post('/findUser',verify, async (req,res) => {
     res.send({status: "user not found"})
   }
 })
+
+app.post('/findUserAdmin',verifyAdmin, async (req,res) => {
+  //find user
+  try {
+    user = await db.findUser(req.body._id);
+    res.send(user);
+  } catch (error) {
+    res.send({status: "user not found"})
+  }
+})
+
 app.post('/deleteUser',verify, async (req, res) => {
   employee = await db.deleteUser(req.body.user._id);
 
