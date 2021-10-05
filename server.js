@@ -136,7 +136,6 @@ app.post('/register', async (req,res) => {
     res.send({status: "error checking email", error: error})
   }
   try {
-    console.log("STUPID FUCKING EID", req.body.eid)
     //check if employee ID exists
     const employeeDetails = await db.findID(req.body.eid);
     console.log(employeeDetails)
