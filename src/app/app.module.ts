@@ -16,6 +16,7 @@ import { RoleGuard } from './auth/auth.guard';
 import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { StoreManageComponent } from './store-manage/store-manage.component';
     CreateUserComponent,
     AccountComponent,
     RegisterComponent,
-    StoreManageComponent
+    StoreManageComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

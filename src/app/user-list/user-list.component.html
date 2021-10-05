@@ -1,0 +1,51 @@
+<body>
+    <table id="userTable" class="table">
+      <tr>
+        <th>Database ID</th>
+        <th>Employee ID</th>
+        <th>Email/Username</th>
+        <th>Admin?</th>
+        <th>Edit User</th>
+        <th>Delete User</th>
+      </tr>
+      <tr *ngFor="let user of users">
+          <td>{{user._id}}</td>
+          <td>{{user.eid}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.admin}}</td>
+          <td><img width="25px" height="25px" src="assets/images/edit.png" alt="edit" (click)="updateForm(user._id)"></td>
+          <td><img width="25px" height="25px" src="assets/images/bin.png" alt="delete" (click)="deleteUser(user._id)"></td>
+      </tr>
+    </table>
+
+    <div  [ngStyle]="{'display': displayPopUp}" id="myModal" class="modal">
+          <div class="modal-content">
+            <span (click)="closeUpdateForm()" class="close">&times;</span>
+            <div class="testbox">
+              <form [formGroup]="userForm" (ngSubmit)="updateUser(user._id)">
+                
+                <h1>Update User form</h1>
+                <hr/>
+
+                <div class="item">
+                    <p>Employee ID</p>
+                    <input type="text" name="eid" placeholder="eid" formControlName="eid">
+                </div>
+
+                <div class="item">
+                    <p>Email or Username:</p>
+                    <input type="text" name="email" placeholder="Email" formControlName="email">
+                </div>
+                
+    
+                <div class="btn-block">
+                  <button type="submit">Send</button>
+                </div>
+                <p class="statusMessage" *ngIf="status">{{status.status}}</p>
+                
+              </form>
+            </div>
+          </div>
+      </div>
+      <p class="statusMessage" *ngIf="status">{{status.status}}</p>
+</body>
