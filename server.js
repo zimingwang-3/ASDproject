@@ -412,7 +412,7 @@ app.post('/verify', async (req,res) => {
   }
 })
 
-app.post('/getAllUsers', async (req, res) => {
+app.post('/getAllUsers', verifyAdmin, async (req, res) => {
   users = await db.getAllUsers();
   res.send(users);
 })
