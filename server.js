@@ -347,6 +347,16 @@ app.post('/addStore',verifyAdmin, async (req,res) => {
   }
 })
 
+app.post('/deleteStore',verifyAdmin, async (req,res) => {
+  console.log(req.body.store);
+  console.log(req.body.store.sName[0]);
+  del = await db.deleteStore(req.body.store);
+  if(del.deletedCount == 1) res.send({status: "store deleted", return: del});
+  if(del.deletedCount != 1) res.send({status: "store not deleted. Please try again"})
+  }
+)
+
+
 
 //verify end-points
 function verify(req,res,next) {

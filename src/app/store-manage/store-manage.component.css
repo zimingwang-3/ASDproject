@@ -87,6 +87,7 @@ html, body {
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+    height: 50%;
   }
 
   .close {
@@ -106,9 +107,7 @@ html, body {
     display: block !important;
   }
 
-  html, body {
-    min-height: 100%;
-  }
+  
     body, div, form, input, select, p { 
     padding: 0;
     margin: 0;
@@ -240,5 +239,11 @@ html, body {
     }
     textarea {
     width: calc(100% - 6px);
+    }
+    .statusMessage {
+      font-size: 25px;
+      text-align: center;
+      color: red;
+  
     }
     }
