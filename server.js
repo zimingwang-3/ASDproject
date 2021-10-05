@@ -168,6 +168,17 @@ app.post('/findUser',verify, async (req,res) => {
     res.send({status: "user not found"})
   }
 })
+
+app.post('/findUserAdmin',verifyAdmin, async (req,res) => {
+  //find user
+  try {
+    user = await db.findUser(req.body._id);
+    res.send(user);
+  } catch (error) {
+    res.send({status: "user not found"})
+  }
+})
+
 app.post('/deleteUser',verify, async (req, res) => {
   employee = await db.deleteUser(req.body.user._id);
 
@@ -176,6 +187,16 @@ app.post('/deleteUser',verify, async (req, res) => {
   } 
   if(employee.deletedCount != 1) res.send({status: "user not deleted. Please try again"})
 });
+
+app.post('/deleteUserAdmin',verifyAdmin, async (req, res) => {
+  employee = await db.deleteUser(req.body._id);
+
+  if(employee.deletedCount == 1){
+    res.send({status: "user deleted"});
+  } 
+  if(employee.deletedCount != 1) res.send({status: "user not deleted. Please try again"})
+});
+
 app.post('/updateUser',verify, async (req, res) => {
   try {
     update = await db.updateUser(req.body.user._id, req.body.update);
@@ -186,6 +207,18 @@ app.post('/updateUser',verify, async (req, res) => {
     res.send({status: "error updating user"})
   }
 });
+
+app.post('/updateUserAdmin',verifyAdmin, async (req, res) => {
+  try {
+    update = await db.updateUser(req.body._id, req.body.update);
+    console.log(update);
+    res.send({status: "updated user records"});
+  } catch (error) {
+    console.log(error);
+    res.send({status: "error updating user"})
+  }
+});
+
 app.post('/updateUserPassword',verify, async (req, res) => {
   console.log(req.body);
   //hash user password
