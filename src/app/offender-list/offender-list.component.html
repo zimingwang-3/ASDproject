@@ -1,16 +1,15 @@
-<body ng-app="exportCSV">
-  <table id="incidentTable" class="table">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Offence</th>
-      <th>Description</th>
-      <th>Location</th>
-    </tr>
-    <tr *ngFor="let offender of offenders">
-        <td>{{offender.id}}</td>
-        <td>{{offender.name}}</td>
-        <td>{{offender.offence}}</td>
-        <td>{{offender.description}}</td>
-        <td>{{offender.location}}</td>
-  </table>
+<table id="incidentTable" class="table">
+  <tr>
+    <th>Name</th>
+    <th>Offence</th>
+    <th>Description</th>
+    <th>Location</th>
+  </tr>
+  <tr *ngFor="let offender of offenders">
+      <td>{{offender.name}}</td>
+      <td>{{offender.offence}}</td>
+      <td>{{offender.description}}</td>
+      <td>{{offender.location}}</td>
+  </tr>
+</table>
+

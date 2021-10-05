@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-Author: Briana Margetts 
+Author: Briana Margetts
 Student number: 140574003
 -->
 
@@ -46,27 +46,27 @@ Student number: 140574003
         <span (click)="closeUpdateForm()" class="close">&times;</span>
         <div class="testbox">
           <form [formGroup]="reportForm" (ngSubmit)="updateIncident()">
-            
+
             <h1>Update complaint form</h1>
             <hr/>
-    
+
             <div class="item">
               <p>Date of complaint</p>
               <input type="date" name="dateOfComp" required formControlName="dateOfComp">
               <i class="fas fa-calendar-alt"></i>
             </div>
-    
+
             <div class="item">
               <p>Name</p>
               <input type="text" name="fName" placeholder="First" formControlName="fName">
               <input type="text" name="lName" placeholder="Last" formControlName="lName">
             </div>
-    
+
             <div class="item">
               <p>Email</p>
               <input type="text" name="email" formControlName="email">
             </div>
-    
+
             <div class="item address">
               <p>Store Address</p>
               <div class="street">
@@ -75,7 +75,7 @@ Student number: 140574003
                 <input type="text" name="city" placeholder="City" formControlName="city">
                 <input type="text" name="region" placeholder="Region" formControlName="region">
                 <input type="text" name="pCode" placeholder="Postal / zip code" formControlName="pCode">
-                
+
                 <select name="sLocation" formControlName="sLocation">
                   <option value="">Store location</option>
                   <option value="CBD Store">CBD store</option>
@@ -86,39 +86,39 @@ Student number: 140574003
                 </select>
               </div>
             </div>
-    
+
             <div class="item">
               <p>Date of the reported incident</p>
               <input type="date" name="date" required formControlName="date">
               <i class="fas fa-calendar-alt"></i>
             </div>
-    
+
             <div class="item location">
               <p>Incident location</p>
               <input type="name" name="name" formControlName="name">
             </div>
-    
+
             <div class="item complaint-details">
               <p>Complaint details</p>
               <div class="complaint-details-item">
                 <textarea name="compDetails" rows="5" formControlName="compDetails"></textarea>
               </div>
             </div>
-    
+
             <div class="item desired-outcome">
               <p>Desired outcome</p>
-    
+
               <div class="desired-outcome-item">
                 <textarea name="desiredOutcome" rows="5" formControlName="desiredOutcome"></textarea>
                 <small>By signing you declare that all information you have entered is truthful and accurate.</small>
               </div>
-            </div>          
+            </div>
 
             <div class="btn-block">
               <button type="submit">Send</button>
             </div>
             <p class="statusMessage" *ngIf="status">{{status.status}}</p>
-            
+
           </form>
         </div>
       </div>

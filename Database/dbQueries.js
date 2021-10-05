@@ -3,7 +3,7 @@ const connect = connection.connect;
 const disconnect = connection.disconnect;
 const getMongoClient = connection.getMongoClient;
 
-var ObjectId = require('mongodb').ObjectId; 
+var ObjectId = require('mongodb').ObjectId;
 
 
 //user queries
@@ -18,7 +18,7 @@ async function getAllUsers() {
     //disconnect and return
     await disconnect(client);
     return usersList;
-    
+
 }
 async function findUser(user){
     //connect to db
@@ -59,10 +59,10 @@ async function addUserAdmin(newUser) {
     //connect to db
     let client = getMongoClient();
     await connect(client);
-    
+
     if(newUser.admin == true) newUser.admin = true;
     if(!newUser.admin || newUser.admin == "") newUser.admin = false;
-    
+
     try {
         //query DB. add user
         const user = await client.db("ASDdata").collection("Users").insertOne(newUser);
@@ -78,7 +78,7 @@ async function updateUser(user, update){
 
     //query DB. update
     const updateUser = await client.db("ASDdata").collection("Users").updateOne(
-        { _id: ObjectId(user) }, 
+        { _id: ObjectId(user) },
         { $set: update });
 
     return updateUser;
@@ -128,7 +128,7 @@ async function updateIncident(incident, update){
     console.log(incident);
     //query DB. add incident report
     const updateIncident = await client.db("ASDdata").collection("Complaints").updateOne(
-        { _id: ObjectId(incident._id), userId: incident.userId }, 
+        { _id: ObjectId(incident._id), userId: incident.userId },
         { $set: update });
 
     return updateIncident;
@@ -173,7 +173,7 @@ async function addStore(store) {
     centre = store.sCentre;
     delete store.sCentre;
     const addedStore = await client.db("ASDdata").collection("SCentres").updateOne(
-        { Name: centre }, 
+        { Name: centre },
         { $push: { Stores: store } });
 
     return addedStore;
@@ -192,7 +192,7 @@ async function addID(newUser) {
             {
                 eid: newUser.eid,
                 storeId: newUser.storeId,
-                centreId: newUser.centreId, 
+                centreId: newUser.centreId,
                 fName: newUser.fName,
                 lName: newUser.lName
             });
@@ -206,10 +206,10 @@ async function findID(employeeId){
     //connect to db
     let client = getMongoClient();
     await connect(client);
-    
+
     //query DB. Fetch users
     const fetchedUser = await client.db("ASDdata").collection("StaffID").findOne({eid: employeeId});
-    
+
     return fetchedUser;
 }
 async function findAllID(){
@@ -238,12 +238,24 @@ async function updateID(eid, update){
 
     //query DB. update employee
     const updateEmployee = await client.db("ASDdata").collection("StaffID").updateOne(
-        { eid: eid }, 
+        { eid: eid },
         { $set: update });
 
     return updateEmployee;
 }
+async function getAllOffenders() {
+  //connect to db
+  let client = getMongoClient();
+  await connect(client);
+
+  //query DB. Fetch all users
+  let offenderList = await client.db('ASDdata').collection('Offenders').find().toArray();
+
+  //disconnect and return
+  await disconnect(client);
+  return offenderList;
+}
 
 module.exports = {
-    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail
+    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail, getAllOffenders
 };

@@ -105,11 +105,11 @@ app.post('/login', async (req,res) => {
 
     //create access token
     const accessToken = jwt.sign(
-      { 
+      {
         _id: user._id,
         admin: user.admin
-      }, 
-      process.env.ACCESS_SECRET, 
+      },
+      process.env.ACCESS_SECRET,
       { expiresIn: '3h' });
 
     //send a welcome back with token id
@@ -173,7 +173,7 @@ app.post('/deleteUser',verify, async (req, res) => {
 
   if(employee.deletedCount == 1){
     res.send({status: "user deleted"});
-  } 
+  }
   if(employee.deletedCount != 1) res.send({status: "user not deleted. Please try again"})
 });
 app.post('/updateUser',verify, async (req, res) => {
@@ -192,7 +192,7 @@ app.post('/updateUserPassword',verify, async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt)
   req.body.password = hashedPassword;
-  
+
   try {
     update = await db.updateUser(req.body.user._id, {password: req.body.password});
     console.log(update);
@@ -212,7 +212,7 @@ app.post('/registerAdmin',verifyAdmin, async (req,res) => {
   //check if email exists
   userEmail = await db.findUserByEmail(req.body.newUser.email);
   if(userEmail) return res.send({status: "email exists: " + userEmail.email});
-  
+
   //hash user password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.newUser.password, salt)
@@ -237,7 +237,7 @@ app.post('/addEmployee',verifyAdmin, async (req,res) => {
   //check if ID exists
   //user = await db.findID(req.body.eid);
   //if(user) return res.send({status: "employee exists: " + user.eid});
-  
+
   try {
     //add user to mongoDB
     db.addID(req.body);
@@ -292,8 +292,13 @@ app.post('/findAllUsers',verifyAdmin, async (req,res) => {
 })
 app.post('/allComplaints',verifyAdmin, async (req,res) => {
   complaints = await db.allIncidents();
-  
+
   res.send(complaints);
+})
+app.post('/findAllOffenders', async (req,res) => {
+  offenders = await db.getAllOffenders();
+
+  res.send(offenders);
 })
 
 //store admin end-points
@@ -347,7 +352,7 @@ function verifyAdmin(req,res,next) {
 app.post('/verify', async (req,res) => {
   const token = req.body.token;
 
-  if(!token){ 
+  if(!token){
     return res.send(
     {
       description: 'Access Denied no access token: '+ token,
