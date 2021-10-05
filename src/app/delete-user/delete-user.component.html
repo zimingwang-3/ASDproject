@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<!--
+Author: Ziming Wang
+Student number: 13134402
+-->
+<h1>Delete User</h1>
+<form #registerForm = "ngForm" (ngSubmit) = "Deleter(DeleterForm.value)">
+  <div class="container">
+      <label for="eid"><b>Employee ID (provided)</b></label>
+      <input type="text" placeholder="Enter ID" name="eid" required  ngModel>
+      <button type="submit">Delete</button>
+      <p *ngIf="status">{{status.status}}</p>
+  </div>
+</form>
