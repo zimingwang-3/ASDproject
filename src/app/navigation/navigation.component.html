@@ -9,6 +9,7 @@
     <li *ngIf="user == true"><a routerLink='/offenders'>Offender List</a></li>
     <li *ngIf="user == true"><a routerLink='/add-offender'>Add Offender</a></li>
     <li *ngIf="admin == true"><a routerLink='/userList'>User List</a></li>
+    <li *ngIf="admin == true"><a routerLink='/newID'>Create Staff ID</a></li>
     <li *ngIf="user == true" style="background-color: red; float: right;"><a (click)="logout()">logout</a></li>
 </ul>
 

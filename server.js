@@ -28,7 +28,7 @@ app.post('/api/submitComplaint',verify, async (req, res) => {
   }
   try {
     const userID = jwt.verify(req.body.token, process.env.ACCESS_SECRET);
-    complaint = req.body;
+    complaint = req.body.complaint;
     complaint.userId = userID._id;
     delete complaint.token;
     db.reportIncident(complaint);
@@ -237,6 +237,7 @@ app.post('/updateUserPassword',verify, async (req, res) => {
 });
 
 //admin end-points
+
 app.post('/registerAdmin',verifyAdmin, async (req,res) => {
   //data validation
   if(!req.body.newUser.email) return res.send({status: "email field empty"});
@@ -351,7 +352,7 @@ app.post('/createOffender', async (req,res) => {
 })
 
 //store admin end-points
-app.post('/allStores',verifyAdmin, async (req,res) => {
+app.post('/allStores',verify, async (req,res) => {
   stores = await db.getAllStores();
   console.log(stores);
   res.send(stores);
@@ -367,6 +368,16 @@ app.post('/addStore',verifyAdmin, async (req,res) => {
     res.send({status: "error adding store"})
   }
 })
+
+app.post('/deleteStore',verifyAdmin, async (req,res) => {
+  console.log(req.body.store);
+  console.log(req.body.store.sName[0]);
+  del = await db.deleteStore(req.body.store);
+  if(del.deletedCount == 1) res.send({status: "store deleted", return: del});
+  if(del.deletedCount != 1) res.send({status: "store not deleted. Please try again"})
+  }
+)
+
 
 
 //verify end-points
@@ -422,7 +433,7 @@ app.post('/verify', async (req,res) => {
   }
 })
 
-app.post('/getAllUsers', async (req, res) => {
+app.post('/getAllUsers', verifyAdmin, async (req, res) => {
   users = await db.getAllUsers();
   res.send(users);
 })

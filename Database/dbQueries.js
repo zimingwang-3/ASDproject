@@ -177,7 +177,28 @@ async function addStore(store) {
         { $push: { Stores: store } });
 
     return addedStore;
+}
 
+async function deleteStore(store) {
+    //connect to db
+    let client = getMongoClient();
+    await connect(client);
+
+    //delete store.sCentre
+
+    //query DB. delete
+    const centre = await client.db("ASDdata").collection("SCentres").findOne({name: store.sCentre})
+
+    //finding the store to remove
+    const removedStore = centre.stores.find((s) => s.sName == store.sName);
+    //filtering the store for update
+    const newStoreArr = centre.stores.filter(store => store !== removedStore);
+
+    console.log("returned store",newStoreArr)
+
+    const fetchedIncidents = await client.db("ASDdata").collection("SCentres").updateOne(
+        {name: store.sCentre}, { $set: { stores: newStoreArr }});
+    return fetchedIncidents;
 }
 
 //centre employee queries (admin queries)
@@ -265,6 +286,8 @@ async function addOffender(offender) {
   console.log("new offender added: ", offender);
 }
 
+
 module.exports = {
-    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail, getAllOffenders, addOffender
+    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail, deleteStore, getAllOffenders, addOffender
 };
+

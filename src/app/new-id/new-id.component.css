@@ -1,4 +1,4 @@
-#incidentTable {
+#userTable {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 75%;
@@ -6,7 +6,7 @@
     margin: auto;
   }
   
-  #incidentTable td, #incidentTable th {
+  #userTable td, #userTable th {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
@@ -16,14 +16,15 @@
     display: block;
     margin-top: 15px;
   }
-  #incidentTable tr:nth-child(even){background-color: #f2f2f2;}
   
-  #incidentTable tr:hover {background-color: #ddd;}
+  #userTable tr:nth-child(even){background-color: #f2f2f2;}
   
-  #incidentTable th {
+  #userTable tr:hover {background-color: #ddd;}
+  
+  #userTable th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: center;
+    text-align: left;
     background-color: #000000;
     color: white;
   }

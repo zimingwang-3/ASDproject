@@ -19,6 +19,7 @@ import { StoreManageComponent } from './store-manage/store-manage.component';
 import { OffenderListComponent } from './offender-list/offender-list.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { CreateOffenderComponent } from './create-offender/create-offender.component';
+import { NewIdComponent } from './new-id/new-id.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CreateOffenderComponent } from './create-offender/create-offender.compo
     StoreManageComponent,
     OffenderListComponent,
     UserListComponent,
-    CreateOffenderComponent
+    CreateOffenderComponent,
+    NewIdComponent
   ],
   imports: [
     BrowserModule,

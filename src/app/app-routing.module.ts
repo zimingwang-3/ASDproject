@@ -7,6 +7,7 @@ import { RoleService } from './auth/role.service';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ExportCsvComponent } from './export-csv/export-csv.component';
 import { LoginComponent } from './login/login.component';
+import { NewIdComponent } from './new-id/new-id.component';
 import { RegisterComponent } from './register/register.component';
 import {ReportFormComponent} from './report-form/report-form.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'store', component: StoreManageComponent, canActivate: [RoleService]},
   { path: 'offenders', component: OffenderListComponent},
   { path: 'add-offender', component: CreateOffenderComponent},
-  { path: 'userList', component: UserListComponent, canActivate: [RoleService]}
+  { path: 'userList', component: UserListComponent, canActivate: [RoleService]},
+  { path: 'newID', component: NewIdComponent, canActivate: [RoleService]}
 ];
 
 @NgModule({

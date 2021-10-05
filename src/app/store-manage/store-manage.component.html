@@ -16,8 +16,8 @@
                 <p for="sCentre">Shopping centre:</p>
                 <select name="sCentre" formControlName="sCentre">
                     <option value="" disabled selected>Store Location:</option>
-                    <option *ngFor="let centre of centres" [value]="centre.Name">
-                        {{centre.Name}}
+                    <option *ngFor="let centre of centres" [value]="centre.name">
+                        {{centre.name}}
                     </option>
                 </select><br>
             </div>
@@ -52,12 +52,28 @@
         <form [formGroup]="deleteForm" (ngSubmit) = "deleteStoreSubmit()">
             <span (click)="closeUpdateForm2()" class="close">&times;</span>
 
-            Delete Store:
-            <select name="del" formControlName="del">
-                <optgroup *ngFor = 'let centre of centres' label="{{centre.Name}}">
-                    <option *ngFor = 'let store of centre.Stores' [value]="store">{{store.sName}}</option> 
-                </optgroup>
+            <div class="item">
+            <p>Store Location:</p>
+            <select name="sCentre" (change)="changeCentre()" formControlName="sCentre">
+                    <option *ngFor="let centre of centres" [value]="centre.name">
+                        {{centre.name}}
+                    </option>
+            </select><br>
+            </div>
+
+            <div class="item">
+            <p>Store Name:</p>
+            
+            <select name="del" formControlName="sName">
+                <option *ngFor = 'let store of centre.stores' [value]="store.sName">{{store.sName}}</option> 
             </select>
+        </div>
+
+            <div class="btn">
+                <button type="submit">Send</button>
+            </div>
+            
+            <p class="statusMessage" *ngIf="status">{{status.status}}</p>
         </form>
     </div>
 </div>

@@ -16,4 +16,9 @@ export class StoreManageService {
     data.token = token;
     return this.http.post("http://localhost:3500/addStore", data);
   }
+
+  deleteStore(data, token) {
+    data.token = token;
+    return this.http.post("http://localhost:3500/deleteStore", data);
+  }
 }
