@@ -184,11 +184,20 @@ async function deleteStore(store) {
     let client = getMongoClient();
     await connect(client);
 
+    //delete store.sCentre
+
     //query DB. delete
-    centre = store.sCentre;
-    delete store.sCentre
-    const fetchedIncidents = await client.db("ASDdata").collection("SCentres").deleteOne(
-        {name: centre}, { Stores: { $pull: {sName: store}}});
+    const centre = await client.db("ASDdata").collection("SCentres").findOne({name: store.sCentre})
+
+    //finding the store to remove
+    const removedStore = centre.stores.find((s) => s.sName == store.sName);
+    //filtering the store for update
+    const newStoreArr = centre.stores.filter(store => store !== removedStore);
+
+    console.log("returned store",newStoreArr)
+    
+    const fetchedIncidents = await client.db("ASDdata").collection("SCentres").updateOne(
+        {name: store.sCentre}, { $set: { stores: newStoreArr }});
     return fetchedIncidents;
 }
 
