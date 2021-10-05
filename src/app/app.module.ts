@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
 import { OffenderListComponent } from './offender-list/offender-list.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { CreateOffenderComponent } from './create-offender/create-offender.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserListComponent } from './user-list/user-list.component';
     RegisterComponent,
     StoreManageComponent,
     OffenderListComponent,
-    UserListComponent
+    UserListComponent,
+    CreateOffenderComponent
   ],
   imports: [
     BrowserModule,

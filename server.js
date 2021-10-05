@@ -193,7 +193,7 @@ app.post('/deleteUserAdmin',verifyAdmin, async (req, res) => {
 
   if(employee.deletedCount == 1){
     res.send({status: "user deleted"});
-  } 
+  }
   if(employee.deletedCount != 1) res.send({status: "user not deleted. Please try again"})
 });
 
@@ -332,6 +332,23 @@ app.post('/findAllOffenders', async (req,res) => {
   offenders = await db.getAllOffenders();
 
   res.send(offenders);
+})
+app.post('/createOffender', async (req,res) => {
+  //Ensure we have all fields we need
+  if(!req.body.name) return res.send({status: "name field empty"});
+  if(!req.body.offence) return res.send({status: "offence field empty"});
+  if(!req.body.description) return res.send({status: "description field empty"});
+  if(!req.body.location) return res.send({status: "location field empty"});
+
+  //If all Fields are good attempt to add user to datebase
+  try {
+    //add user to mongoDB
+    db.addOffender(req.body);
+    res.send({status: `added offender`});
+  } catch (error) {
+    console.log(error);
+    res.send({status: `error creating offender`});
+  }
 })
 
 //store admin end-points

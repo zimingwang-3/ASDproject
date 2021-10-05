@@ -248,14 +248,23 @@ async function getAllOffenders() {
   let client = getMongoClient();
   await connect(client);
 
-  //query DB. Fetch all users
+  //query DB. Fetch all offenders
   let offenderList = await client.db('ASDdata').collection('Offenders').find().toArray();
 
   //disconnect and return
   await disconnect(client);
   return offenderList;
 }
+async function addOffender(offender) {
+  //connect to db
+  let client = getMongoClient();
+  await connect(client);
+
+  //query DB. add offender
+  const user = await client.db("ASDdata").collection("Offenders").insertOne(offender);
+  console.log("new offender added: ", offender);
+}
 
 module.exports = {
-    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail, getAllOffenders
+    getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail, getAllOffenders, addOffender
 };
