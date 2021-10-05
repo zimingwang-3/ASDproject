@@ -1,0 +1,41 @@
+<body>
+    <div class="testbox">
+        <form [formGroup]="newIdForm" (ngSubmit)="addID()">
+          
+          <h1>Create Staff ID/Details</h1>
+          <hr/>
+
+          <div class="item">
+              <p>Employee ID</p>
+              <input type="text" name="eid" placeholder="eid" formControlName="eid">
+          </div>
+
+          <div class="item">
+            <p>Name</p>
+            <input type="text" name="fName" placeholder="First" formControlName="fName">
+            <input type="text" name="lName" placeholder="Last" formControlName="lName">
+          </div>
+
+          <div class="item">
+            <p>Centre Name:</p>
+            <select (change)="changeCentre()" name="centreLocation" formControlName="centreId">
+              <option  *ngFor="let centre of centres" value="{{centre.name}}">{{centre.name}}</option>
+            </select>
+          </div>
+          <div class="item">
+            <p>Store Name</p>
+            <select *ngIf="centrePicked" name="storeLocation" formControlName="storeId">
+              <option *ngFor="let store of sCentre.stores" value="{{store.sName}}">{{store.sName}}</option>
+            </select>
+          </div>
+
+          
+
+          <div class="btn-block">
+            <button type="submit">Send</button>
+          </div>
+          <p class="statusMessage" *ngIf="status">{{status.status}}</p>
+          
+        </form>
+      </div>
+</body>

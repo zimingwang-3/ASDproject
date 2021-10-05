@@ -256,6 +256,7 @@ async function updateID(eid, update){
     return updateEmployee;
 }
 
+
 module.exports = {
     getAllUsers: getAllUsers, addUser,addUserAdmin, findUser, reportIncident, userIncidents, deleteIncident, updateIncident, userIncident, addID , deleteID, updateID, findID, findAllID, deleteUser, updateUser, AdminDeleteIncident, allIncidents, getAllStores, addStore, findUserByEmail, deleteStore
 };
