@@ -17,6 +17,7 @@ import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
 import { OffenderListComponent } from './offender-list/offender-list.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { OffenderListComponent } from './offender-list/offender-list.component';
     AccountComponent,
     RegisterComponent,
     StoreManageComponent,
-    OffenderListComponent
+    OffenderListComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import {ReportFormComponent} from './report-form/report-form.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
 import { OffenderListComponent } from './offender-list/offender-list.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'store', component: StoreManageComponent, canActivate: [RoleService]},
   { path: 'offenders', component: OffenderListComponent},
+  { path: 'userList', component: UserListComponent, canActivate: [RoleService]}
 ];
 
 @NgModule({
