@@ -171,8 +171,10 @@ app.post('/findUser',verify, async (req,res) => {
 app.post('/deleteUser',verify, async (req, res) => {
   employee = await db.deleteUser(req.body.user._id);
 
-  if(employee.deletedCount == 1) res.send({status: "report deleted", return: employee});
-  if(employee.deletedCount != 1) res.send({status: "report not deleted. Please try again"})
+  if(employee.deletedCount == 1){
+    res.send({status: "user deleted"});
+  } 
+  if(employee.deletedCount != 1) res.send({status: "user not deleted. Please try again"})
 });
 app.post('/updateUser',verify, async (req, res) => {
   try {
@@ -184,7 +186,22 @@ app.post('/updateUser',verify, async (req, res) => {
     res.send({status: "error updating user"})
   }
 });
-
+app.post('/updateUserPassword',verify, async (req, res) => {
+  console.log(req.body);
+  //hash user password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt)
+  req.body.password = hashedPassword;
+  
+  try {
+    update = await db.updateUser(req.body.user._id, {password: req.body.password});
+    console.log(update);
+    res.send({status: "updated user records"});
+  } catch (error) {
+    console.log(error);
+    res.send({status: "error updating user"})
+  }
+});
 
 //admin end-points
 app.post('/registerAdmin',verifyAdmin, async (req,res) => {

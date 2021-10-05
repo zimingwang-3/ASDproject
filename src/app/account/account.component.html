@@ -1,1 +1,57 @@
-<p>account works!</p>
+<H1>Account settings</H1>
+<div style="text-align: center;">
+	<button (click)="emailChangePopUp()">change email</button>
+	<button (click)="passChangePopUp()">change password</button>
+	<button (click)="deleteAccountPopUp()">delete account</button>
+</div>
+
+
+<div  [ngStyle]="{'display': displayPopUp1}" id="myModal" class="modal1">
+    <div class="modal-content">
+        <form #updateEmailForm="ngForm" (ngSubmit)="changeEmail(updateEmailForm.value)">
+			<span (click)="closeUpdateForm()" class="close">&times;</span>
+			<h1>Change Email</h1><br>
+            <div class="item">
+                <p>Email</p>
+                <input type="email" name="email" required  ngModel>
+            </div>
+			<div style="text-align: center;">
+				<input style="margin-left: -20px;" type="submit" value="submit" >
+			</div>
+			<p *ngIf="status">{{status.status}}</p>
+			
+		</form>
+	</div>
+</div>
+
+<div  [ngStyle]="{'display': displayPopUp2}" id="myModal" class="modal1">
+    <div class="modal-content">
+        <form #updatePassForm="ngForm" (ngSubmit)="changePassword(updatePassForm.value)">
+			<span (click)="closepassUpdateForm()" class="close">&times;</span>
+			<h1>Change Password</h1><br>
+            <div class="item">
+                <p>password</p>
+                <input type="password" name="password" required  ngModel>
+            </div>
+			<div style="text-align: center;">
+				<input style="margin-left: -20px;" type="submit" value="submit" >
+			</div>
+			<p *ngIf="status">{{status.status}}</p>
+		</form>
+	</div>
+</div>
+
+<div  [ngStyle]="{'display': displayPopUp3}" id="myModal" class="modal1">
+    <div class="modal-content">
+        <form #updatePassForm="ngForm" (ngSubmit)="deleteAcc()">
+			<span (click)="closeDeleteAccountPopUp()" class="close">&times;</span>
+			<h1 style="color: red;">Are you sure you want to delete your account</h1><br>
+
+			<div style="text-align: center;">
+				<input style="margin-left: -20px;" type="submit" value="Yes" >
+				<input  type="submit" value="No" (click)="closeDeleteAccountPopUp()">
+			</div>
+			<p *ngIf="status">{{status.status}}</p>
+		</form>
+	</div>
+</div>

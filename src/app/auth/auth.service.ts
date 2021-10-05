@@ -29,7 +29,6 @@ export class AuthService {
   async verifyUser(){
 
     this.AT = this.cookieService.get("access-token");
-    
     try {
       //subscribe to auth service to verify token
       this.auth = await this.verifyToken(this.AT);
@@ -37,8 +36,8 @@ export class AuthService {
     } catch (error) {
       console.log("Something went wrong with token verification: " ,error)
     }
-
-    if(this.auth.verification){ 
+    
+    if(this.auth.verification){
       this.user.next(true); 
       return true;
     }else{

@@ -20,6 +20,7 @@ export class NavigationComponent implements OnInit {
     
 
     this.authService.isUser$.subscribe(u => {
+      //if(u == false){ this.user = false; }
       if(u == true && this.user == false){
         this.isUser(); 
         this.user = true;
@@ -27,6 +28,7 @@ export class NavigationComponent implements OnInit {
     })
 
     this.authService.isAdmin$.subscribe(u => {
+      //if(u == false) { this.admin = false; }
       if(u == true && this.admin == false){
         this.isAdmin(); 
         this.admin = true;
