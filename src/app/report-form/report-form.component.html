@@ -10,6 +10,7 @@
         <hr/>
 
         <div class="item">
+
           <p>Name</p>
           <input type="text" name="fName" placeholder="First" formControlName="fName">
           <input type="text" name="lName" placeholder="Last" formControlName="lName">
@@ -19,6 +20,7 @@
           <p>Email</p>
           <input type="text" name="email" formControlName="email">
         </div>
+
         <div class="item">
           <p>centre name:</p>
           <select (change)="changeCentre()" name="centreLocation" formControlName="centreLocation">
@@ -30,27 +32,30 @@
           <select *ngIf="centrePicked" name="storeLocation" formControlName="storeLocation">
             <option *ngFor="let store of sCentre.stores" value="{{store.sName}}">{{store.sName}}</option>
           </select>
+
         </div>
         <div class="item">
+
           <p>Date of the reported incident</p>
           <input type="date" name="incidentDate" required formControlName="incidentDate">
           <i class="fas fa-calendar-alt"></i>
         </div>
 
         <div class="item location">
+
           <p>Incident location</p>
           <input type="incLocation" name="name" formControlName="incidentLocation">
         </div>
 
         <div class="item complaint-details">
-          <p>Complaint details</p>
+          <p>Complaint Details</p>
           <div class="complaint-details-item">
             <textarea name="compDetails" rows="5" formControlName="compDetails"></textarea>
           </div>
         </div>
 
         <div class="item desired-outcome">
-          <p>Desired outcome</p>
+          <p>Desired Outcome</p>
 
           <div class="desired-outcome-item">
             <textarea name="desiredOutcome" rows="5" formControlName="desiredOutcome"></textarea>
@@ -58,13 +63,13 @@
           </div>
         </div>
 
-        <h4>Your signature</h4>
+        <h4>Your Signature</h4>
 
         <textarea name="signature" rows="5" formControlName="signature"></textarea>
         <small>By signing you declare that all information you have entered is truthful and accurate.</small>
         
         <div class="btn-block">
-          <button type="submit">Send</button>
+          <button type="submit">SEND</button>
         </div>
       </form>
     </div>

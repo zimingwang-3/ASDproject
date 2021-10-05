@@ -1,4 +1,4 @@
-<H1>Account settings</H1>
+<H1>Account Settings</H1>
 <div style="text-align: center;">
 	<button (click)="emailChangePopUp()">change email</button>
 	<button (click)="passChangePopUp()">change password</button>
@@ -30,7 +30,7 @@
 			<span (click)="closepassUpdateForm()" class="close">&times;</span>
 			<h1>Change Password</h1><br>
             <div class="item">
-                <p>password</p>
+                <p>Password</p>
                 <input type="password" name="password" required  ngModel>
             </div>
 			<div style="text-align: center;">
@@ -45,7 +45,7 @@
     <div class="modal-content">
         <form #updatePassForm="ngForm" (ngSubmit)="deleteAcc()">
 			<span (click)="closeDeleteAccountPopUp()" class="close">&times;</span>
-			<h1 style="color: red;">Are you sure you want to delete your account</h1><br>
+			<h1 style="color: red;">Are you sure you want to delete your account?</h1><br>
 
 			<div style="text-align: center;">
 				<input style="margin-left: -20px;" type="submit" value="Yes" >

@@ -11,7 +11,7 @@
 
             <span (click)="closeUpdateForm1()" class="close">&times;</span>
             <h1>Add store</h1>
-            <p style="text-align: center;">fill out this form to add a new store</p><br>
+            <p style="text-align: center;">Fill out this form to add a new store</p><br>
             <div class="item">
                 <p for="sCentre">Shopping centre:</p>
                 <select name="sCentre" formControlName="sCentre">
@@ -24,21 +24,21 @@
 
             <br><br><h1>Store details</h1>
             <div class="item">
-                <p>storename:</p>
+                <p>Storename:</p>
                 <input type="name" name="storeName" formControlName="sName">
             </div>
             <div class="item">
-                <p for="storeName">store floor/location:</p>
+                <p for="storeName">Store Floor/Location:</p>
                 <input type="name" name="storeName" formControlName="sLocation">
             </div>
 
             <div class="item">
-                <p for="storeName">store number:</p>
+                <p for="storeName">Store number:</p>
                 <input type="name" name="storeName" formControlName="sNumber">
             </div>
  
             <div class="btn">
-                <button type="submit">Send</button>
+                <button type="submit">SEND</button>
             </div>
 
             <p class="statusMessage" *ngIf="status">{{status.status}}</p>
