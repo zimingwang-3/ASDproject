@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {ReportFormComponent} from './report-form/report-form.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'form', component: ReportFormComponent, canActivate: [AuthGuard]},
   { path: 'add-employee', component: CreateUserComponent, canActivate: [RoleService]},
   { path: 'register', component: RegisterComponent},
-  { path: 'store', component: StoreManageComponent, canActivate: [RoleService]}
+  { path: 'store', component: StoreManageComponent, canActivate: [RoleService]},
+  { path: 'userList', component: UserListComponent, canActivate: [RoleService]}
 ];
 
 @NgModule({

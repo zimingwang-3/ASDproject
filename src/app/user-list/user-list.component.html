@@ -1,0 +1,20 @@
+<body>
+    <table id="userTable" class="table">
+      <tr>
+        <th>Database ID</th>
+        <th>Employee ID</th>
+        <th>Email/Username</th>
+        <th>Admin?</th>
+        <th>Edit User</th>
+        <th>Delete User</th>
+      </tr>
+      <tr *ngFor="let user of users">
+          <td>{{user._id}}</td>
+          <td>{{user.eid}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.admin}}</td>
+          <td><img width="25px" height="25px" src="assets/images/edit.png" alt="edit"></td>
+          <td><img width="25px" height="25px" src="assets/images/bin.png" alt="delete"></td>
+      </tr>
+    </table>
+</body>

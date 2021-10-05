@@ -368,6 +368,12 @@ app.post('/verify', async (req,res) => {
   }
 })
 
+app.post('/getAllUsers', async (req, res) => {
+  users = await db.getAllUsers();
+  res.send(users);
+})
+
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
