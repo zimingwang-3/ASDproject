@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-import { CookieService } from 'ngx-cookie-service'
+import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 @Component({

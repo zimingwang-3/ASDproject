@@ -173,8 +173,8 @@ async function addStore(store) {
     centre = store.sCentre;
     delete store.sCentre;
     const addedStore = await client.db("ASDdata").collection("SCentres").updateOne(
-        { Name: centre }, 
-        { $push: { Stores: store } });
+        { name: centre }, 
+        { $push: { stores: store } });
 
     return addedStore;
 }

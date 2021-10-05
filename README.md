@@ -1,10 +1,15 @@
 # ASDproject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+## Project installation
+Run `npm install` to download all libraries required to run project
 
-## Development server
+Run `ng serve` to start test server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Project Server
+
+Run `node server.js` to start server and DB connection
+
 
 ## Code scaffolding
 

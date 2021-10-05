@@ -3,22 +3,22 @@
 Author: Luke Galic
 Student number: 13564810
 -->
-<h1>Add user</h1>
+<h1>Add User</h1>
 <form #registerForm = "ngForm" (ngSubmit) = "register(registerForm.value)">
   <div class="container">
-      <label for="eid"><b>employee ID (provided)</b></label>
+      <label for="eid"><b>Employee ID (provided)</b></label>
       <input type="text" placeholder="Enter ID" name="eid" required  ngModel>
 
-      <label for="email"><b>email</b></label>
+      <label for="email"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="email" required ngModel>
   
       <label for="password"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" required ngModel>
 
-      <label for="admin"><b>create as admin?</b></label><br>
+      <label for="admin"><b>Create as Admin?</b></label><br>
       <input type="checkbox" name="admin" value="false" required  ngModel>
 
-      <button type="submit">Add</button>
+      <button type="submit">ADD</button>
       <p *ngIf="status">{{status.status}}</p>
   </div>
 </form>
