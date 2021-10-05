@@ -66,7 +66,6 @@ export class ExportCsvComponent implements OnInit {
         
         //loop data over to the form
         this.reportForm.controls[property].setValue(this.complaint[property]);
-        
         //console.log("property = ", property, "Value in property = ", this.reportForm.controls[property].value)
       }
     });
