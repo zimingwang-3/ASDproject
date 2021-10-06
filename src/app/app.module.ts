@@ -39,7 +39,6 @@ import { HttpClient } from '@angular/common/http';
     AccountComponent,
     CreateOffenderComponent,
     NewIdComponent
-
   ],
   imports: [
     BrowserModule,
