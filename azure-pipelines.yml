@@ -15,12 +15,17 @@ steps:
     versionSpec: '14.17.5'
   displayName: 'Install Node.js'
 
+- task: Npm@1
+  displayName: 'Test Angular'
+  inputs:
+    command: custom
+    customCommand: run test -- --watch=false
+    workingDir: src/angular7
+
 - script: |
     npm install -g @angular/cli
     npm install
     ng build --prod
   displayName: 'npm install and build'
 
-- script: |
-    npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-  displayName: 'Run Unit Tests'
+
