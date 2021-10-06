@@ -5,14 +5,14 @@ Student number: 13564810
 -->
 <h1>Login</h1>
 
-<form #loginForm = "ngForm" (ngSubmit) = "login(loginForm.value)">
+<form [formGroup]="loginForm" (ngSubmit) = "login()">
   <div class="container">
     <label for="email"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="email" required  ngModel>
+    <input type="text" placeholder="Enter Username" name="email" required  formControlName="email">
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required  ngModel>
-    <button type="submit">LOGIN</button>
+    <input type="password" placeholder="Enter Password" name="password" required  formControlName="password">
+    <button [disabled]="!loginForm.valid" type="submit">LOGIN</button>
 
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember Me

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from './register.service';
 
 @Component({
@@ -12,10 +13,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  register(newUser){
-    console.log(newUser);
-    this.api.register(newUser).subscribe(data => this.status = data);
+  registerForm = new FormGroup({
+    eid: new FormControl('', [Validators.pattern(/^[0-9]*$/)]),
+    email: new FormControl('',[Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{1,}$/)]),
+    password: new FormControl('', [Validators.required,Validators.minLength(8)])
+  })
+  
+  register(){
+    this.api.register(this.registerForm.value).subscribe(data => this.status = data);
   }
 
 }
