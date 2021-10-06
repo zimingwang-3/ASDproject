@@ -20,7 +20,7 @@ steps:
   inputs:
     command: custom
     customCommand: run test -- --watch=false
-    workingDir: src/angular7
+    workingDir: src/angular12
 
 - script: |
     npm install -g @angular/cli
