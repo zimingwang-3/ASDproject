@@ -1,26 +1,25 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { NewIdComponent } from './new-id.component';
-import {HttpClientModule} from '@angular/common/http';
-import { NewIdService } from './new-id.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { OffenderListComponent } from './offender-list.component';
+import { OffenderListService } from './offender-list.service';
 
-describe('NewIdComponent', () => {
-  let component: NewIdComponent;
-  let fixture: ComponentFixture<NewIdComponent>;
+describe('OffenderListComponent', () => {
+  let component: OffenderListComponent;
+  let fixture: ComponentFixture<OffenderListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewIdComponent ],
+      declarations: [ OffenderListComponent ],
       imports: [HttpClientModule, RouterTestingModule],
-      providers: [NewIdService]
+      providers: [OffenderListService]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewIdComponent);
+    fixture = TestBed.createComponent(OffenderListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

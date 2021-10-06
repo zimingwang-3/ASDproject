@@ -176,7 +176,8 @@ html, body {
   text-align: center;
   }
   button {
-  width: 150px;
+    text-align: center;  
+    width: 150px;
   padding: 10px;
   border: none;
   -webkit-border-radius: 5px; 
@@ -186,6 +187,7 @@ html, body {
   font-size: 16px;
   color: #fff;
   cursor: pointer;
+
   }
   button:hover {
   background-color: #0666a3;

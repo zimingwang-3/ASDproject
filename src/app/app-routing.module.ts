@@ -11,7 +11,9 @@ import { NewIdComponent } from './new-id/new-id.component';
 import { RegisterComponent } from './register/register.component';
 import {ReportFormComponent} from './report-form/report-form.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
+import { OffenderListComponent } from './offender-list/offender-list.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { CreateOffenderComponent } from './create-offender/create-offender.component';
 
 const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'add-employee', component: CreateUserComponent, canActivate: [RoleService]},
   { path: 'register', component: RegisterComponent},
   { path: 'store', component: StoreManageComponent, canActivate: [RoleService]},
+  { path: 'offenders', component: OffenderListComponent, canActivate: [RoleService]},
+  { path: 'add-offender', component: CreateOffenderComponent, canActivate: [RoleService]},
   { path: 'userList', component: UserListComponent, canActivate: [RoleService]},
   { path: 'newID', component: NewIdComponent, canActivate: [RoleService]}
 ];

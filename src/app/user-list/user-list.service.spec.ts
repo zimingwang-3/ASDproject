@@ -1,12 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
 import { UserListService } from './user-list.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('UserListService', () => {
   let service: UserListService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule],
+      providers: [UserListService]
+    });
     service = TestBed.inject(UserListService);
   });
 

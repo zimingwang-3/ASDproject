@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnyBulkWriteOperation } from 'mongodb';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../auth/auth.service';
 import { AccountService } from './account.service';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-account',
@@ -10,7 +13,9 @@ import { AccountService } from './account.service';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
+  user: any;
+  users: any;
+  
   constructor(private api:AccountService, private cookieService: CookieService, private router: Router, private authService: AuthService) { }
   status: any;
   displayPopUp1: any = "none";

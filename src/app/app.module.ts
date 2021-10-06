@@ -16,7 +16,9 @@ import { RoleGuard } from './auth/auth.guard';
 import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
+import { OffenderListComponent } from './offender-list/offender-list.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { CreateOffenderComponent } from './create-offender/create-offender.component';
 import { NewIdComponent } from './new-id/new-id.component';
 
 @NgModule({
@@ -30,7 +32,11 @@ import { NewIdComponent } from './new-id/new-id.component';
     AccountComponent,
     RegisterComponent,
     StoreManageComponent,
+    OffenderListComponent,
     UserListComponent,
+    NewIdComponent,
+    AccountComponent,
+    CreateOffenderComponent,
     NewIdComponent
   ],
   imports: [
@@ -38,7 +44,7 @@ import { NewIdComponent } from './new-id/new-id.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
