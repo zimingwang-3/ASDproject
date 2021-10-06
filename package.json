@@ -29,6 +29,7 @@
     "ngx-cookie-service": "^12.0.3",
     "npm": "^6.14.15",
     "npm-install-peers": "^1.2.2",
+    "puppeteer": "^10.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
