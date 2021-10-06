@@ -22,5 +22,5 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+    ng test --watch=false --browsers=ChromeHeadless
   displayName: 'Run Unit Tests'
