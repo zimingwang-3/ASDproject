@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { NewIdComponent } from './new-id/new-id.component';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,14 +32,16 @@ import { NewIdComponent } from './new-id/new-id.component';
     RegisterComponent,
     StoreManageComponent,
     UserListComponent,
-    NewIdComponent
+    NewIdComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClient
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
