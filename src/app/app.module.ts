@@ -20,6 +20,7 @@ import { OffenderListComponent } from './offender-list/offender-list.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { CreateOffenderComponent } from './create-offender/create-offender.component';
 import { NewIdComponent } from './new-id/new-id.component';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,15 +35,19 @@ import { NewIdComponent } from './new-id/new-id.component';
     StoreManageComponent,
     OffenderListComponent,
     UserListComponent,
+    NewIdComponent,
+    AccountComponent,
     CreateOffenderComponent,
     NewIdComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClient
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

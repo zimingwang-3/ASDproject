@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExportCsvComponent } from './export-csv.component';
+import {HttpClientModule} from '@angular/common/http';
+import { ExportCsvService } from './export-csv.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ExportCsvComponent', () => {
   let component: ExportCsvComponent;
@@ -8,7 +11,9 @@ describe('ExportCsvComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExportCsvComponent ]
+      declarations: [ ExportCsvComponent ],
+      imports: [HttpClientModule, RouterTestingModule],
+      providers: [ExportCsvService]
     })
     .compileComponents();
   });

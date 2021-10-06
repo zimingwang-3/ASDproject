@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../auth/auth.service';
 import { AccountService } from './account.service';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-account',
