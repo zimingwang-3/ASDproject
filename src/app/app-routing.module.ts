@@ -23,8 +23,8 @@ const routes: Routes = [
   { path: 'add-employee', component: CreateUserComponent, canActivate: [RoleService]},
   { path: 'register', component: RegisterComponent},
   { path: 'store', component: StoreManageComponent, canActivate: [RoleService]},
-  { path: 'offenders', component: OffenderListComponent},
-  { path: 'add-offender', component: CreateOffenderComponent},
+  { path: 'offenders', component: OffenderListComponent, canActivate: [RoleService]},
+  { path: 'add-offender', component: CreateOffenderComponent, canActivate: [RoleService]},
   { path: 'userList', component: UserListComponent, canActivate: [RoleService]},
   { path: 'newID', component: NewIdComponent, canActivate: [RoleService]}
 ];
