@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!--
+Author: Anton Horlanchuk
+Student number: 13571601
+-->
+<h1>Add Offender</h1>
+<form #registerForm = "ngForm" (ngSubmit) = "createNewOffender(registerForm.value)">
+  <div class="container">
+      <label for="name"><b>Offender Name</b></label>
+      <input type="text" placeholder="Enter Name" name="name" required  ngModel>
+
+      <label for="reportID"><b>Report ID</b></label>
+      <input type="text" placeholder="Enter Offence Committed" name="reportID" required ngModel>
+
+      <label for="description"><b>Brief Description Of Person</b></label>
+      <input type="text" placeholder="Enter Description" name="description" required ngModel>
+
+      <button type="submit">Add Offender</button>
+      <p *ngIf="status">{{status.status}}</p>
+  </div>
+</form>
