@@ -16,7 +16,9 @@ import { RoleGuard } from './auth/auth.guard';
 import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
 import { StoreManageComponent } from './store-manage/store-manage.component';
+import { OffenderListComponent } from './offender-list/offender-list.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { CreateOffenderComponent } from './create-offender/create-offender.component';
 import { NewIdComponent } from './new-id/new-id.component';
 import { HttpClient } from '@angular/common/http';
 
@@ -31,9 +33,13 @@ import { HttpClient } from '@angular/common/http';
     AccountComponent,
     RegisterComponent,
     StoreManageComponent,
+    OffenderListComponent,
     UserListComponent,
     NewIdComponent,
-    AccountComponent
+    AccountComponent,
+    CreateOffenderComponent,
+    NewIdComponent
+
   ],
   imports: [
     BrowserModule,
