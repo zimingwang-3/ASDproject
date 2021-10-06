@@ -4,7 +4,7 @@ Author: Anton Horlanchuk
 Student number: 13571601
 -->
 <h1>Add Offender</h1>
-<form #registerForm = "ngForm" (ngSubmit) = "createNewOffender(registerForm.value)">
+<form [formGroup]="registerForm"  (ngSubmit) = "createNewOffender(registerForm.value)">
   <div class="container">
       <label for="name"><b>Offender Name</b></label>
       <input type="text" placeholder="Enter Name" name="name" required  ngModel>
