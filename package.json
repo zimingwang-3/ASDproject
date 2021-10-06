@@ -29,7 +29,6 @@
     "ngx-cookie-service": "^12.0.3",
     "npm": "^6.14.15",
     "npm-install-peers": "^1.2.2",
-    "puppeteer": "^10.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
@@ -44,11 +43,12 @@
     "jasmine-core": "^3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.4",
-    "karma-chrome-launcher": "~3.1.0",
+    "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "puppeteer": "^10.4.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.3.5"
