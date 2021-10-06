@@ -3,6 +3,8 @@ import { ExportCsvService } from './export-csv.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
+
 
 @Component({
   selector: 'app-export-csv',
@@ -91,8 +93,20 @@ export class ExportCsvComponent implements OnInit {
     this.getFormData();
   }
 
-  exportComplaints(complaints){
-    //placeholder
-  }
-
+  exportComplaints(){
+    var x = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      title: 'Incident List',
+      useBom: true,
+      headers: ["id","Date of incident",	"Name",	"Email",	"Store location",	"Store name",
+      	"Date of incident", "incident location", "Complaint details",	"Desired outcome"]
+    };
+   
+    new ngxCsv(this.reportForm, "IncidentList", x);
+     }
+  
 }
