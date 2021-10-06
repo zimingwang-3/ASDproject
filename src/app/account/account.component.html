@@ -8,7 +8,7 @@
 
 <div  [ngStyle]="{'display': displayPopUp1}" id="myModal" class="modal1">
     <div class="modal-content">
-        <form [formGroup]="updateEmailForm" (ngSubmit)="changeEmail(updateEmailForm.value)">
+        <form #updateEmailForm="ngForm" (ngSubmit)="changeEmail(updateEmailForm.value)">
 			<span (click)="closeUpdateForm()" class="close">&times;</span>
 			<h1>Change Email</h1><br>
             <div class="item">
@@ -26,7 +26,7 @@
 
 <div  [ngStyle]="{'display': displayPopUp2}" id="myModal" class="modal1">
     <div class="modal-content">
-        <form [formGroup]="updatePassForm" (ngSubmit)="changePassword(updatePassForm.value)">
+        <form #updatePassForm="ngForm" (ngSubmit)="changePassword(updatePassForm.value)">
 			<span (click)="closepassUpdateForm()" class="close">&times;</span>
 			<h1>Change Password</h1><br>
             <div class="item">
@@ -43,7 +43,7 @@
 
 <div  [ngStyle]="{'display': displayPopUp3}" id="myModal" class="modal1">
     <div class="modal-content">
-        <form [formGroup]="updatePassForm" (ngSubmit)="deleteAcc()">
+        <form #updatePassForm="ngForm" (ngSubmit)="deleteAcc()">
 			<span (click)="closeDeleteAccountPopUp()" class="close">&times;</span>
 			<h1 style="color: red;">Are you sure you want to delete your account?</h1><br>
 
