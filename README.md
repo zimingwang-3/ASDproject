@@ -33,28 +33,44 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Student features
 Briana Margetts -
+
 Update account
+
 Export incident list
 
+
 Yasin Celik - 
+
 Report Incident
+
 View Incident
 
+
 Ziming Wang - 
+
 Delete user reports
+
 Update user reports
 
+
 Luke Galic -
+
 Create account
+
 Sign in
 
+
 Whiteman Harry - 
+
 View all user reports
+
 Filter reports based on location
 
 
 Horlanchuk Anton -
+
 View Offenders
+
 Add Offender to Incident Report
 
 
